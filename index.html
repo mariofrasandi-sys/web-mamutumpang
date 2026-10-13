@@ -141,10 +141,11 @@
                     </div>
                 </a>
 
-                <!-- Navigasi Utama + Menu E-Karakter (Icon & Login) Sejajar -->
+                <!-- Navigasi Utama + Menu E-Karakter Sejajar -->
                 <nav class="hidden lg:flex items-center space-x-1 font-medium text-slate-700 text-sm">
                     <a href="#beranda" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Beranda</a>
                     <a href="#profil" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Profil</a>
+                    <a href="#guru" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Guru</a>
                     <a href="#pengumuman" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Pengumuman</a>
                     <a href="#program" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Program</a>
                     <a href="#ekstrakurikuler" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Ekskul</a>
@@ -153,10 +154,10 @@
                     <a href="#berita" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Berita</a>
                     <a href="#kontak" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Kontak</a>
                     
-                    <!-- Menu E-Karakter (Icon & Login Terintegrasi URL Manual) -->
-                    <a :href="schoolInfo.ekarakterUrl || 'https://script.google.com/'" target="_blank" class="ml-2 px-3.5 py-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold transition flex items-center gap-2 border border-emerald-200">
+                    <!-- Menu E-Karakter (Sejajar dengan Navigasi, Link Manual dari CMS) -->
+                    <a :href="schoolInfo.ekarakterUrl || '#'" target="_blank" class="ml-2 px-3.5 py-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold transition flex items-center gap-2 border border-emerald-200">
                         <i class="fas fa-id-card-clip text-emerald-600"></i>
-                        <span>Login</span>
+                        <span>E Karakter</span>
                     </a>
                 </nav>
 
@@ -176,6 +177,7 @@
         <div x-show="mobileMenuOpen" x-transition class="lg:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-2">
             <a @click="mobileMenuOpen = false" href="#beranda" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Beranda</a>
             <a @click="mobileMenuOpen = false" href="#profil" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Profil</a>
+            <a @click="mobileMenuOpen = false" href="#guru" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Dewan Guru</a>
             <a @click="mobileMenuOpen = false" href="#pengumuman" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Pengumuman</a>
             <a @click="mobileMenuOpen = false" href="#program" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Program Unggulan</a>
             <a @click="mobileMenuOpen = false" href="#ekstrakurikuler" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Ekstrakurikuler</a>
@@ -184,9 +186,8 @@
             <a @click="mobileMenuOpen = false" href="#berita" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Berita & Informasi</a>
             <a @click="mobileMenuOpen = false" href="#kontak" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kontak</a>
             
-            <!-- Mobile Menu E-Karakter Login -->
-            <a :href="schoolInfo.ekarakterUrl || 'https://script.google.com/'" target="_blank" class="block px-3 py-2 rounded-md text-base font-medium bg-emerald-50 text-emerald-800">
-                <i class="fas fa-id-card-clip mr-2 text-emerald-600"></i> Login E-Karakter
+            <a :href="schoolInfo.ekarakterUrl || '#'" target="_blank" class="block px-3 py-2 rounded-md text-base font-medium bg-emerald-50 text-emerald-800">
+                <i class="fas fa-id-card-clip mr-2 text-emerald-600"></i> E Karakter
             </a>
 
             <div class="pt-4">
@@ -197,7 +198,7 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Teks Bisa Diedit di CMS) -->
     <section id="beranda" class="relative min-h-[85vh] flex items-center bg-slate-900 text-white overflow-hidden">
         <div class="absolute inset-0 z-0 opacity-40 mix-blend-overlay bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop');"></div>
         <div class="absolute inset-0 z-0 hero-gradient"></div>
@@ -207,14 +208,10 @@
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                     <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-800/80 border border-emerald-600/50 text-emerald-200 text-xs sm:text-sm font-medium">
                         <span class="w-2.5 h-2.5 rounded-full bg-gold-400 animate-pulse"></span>
-                        Madrasah Aliyah Berbasis Pesantren & Digital
+                        <span x-text="heroContent.badgeText"></span>
                     </div>
-                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-                        Membentuk Generasi <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-emerald-200 to-white">Islami, Berprestasi</span> & Berteknologi
-                    </h1>
-                    <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                        Selamat datang di MA Mambaul Ulum Tumpang Malang. Kami memadukan keunggulan ilmu syari'at pesantren, kurikulum nasional, program Tahfidh Qur'an, dan teknologi modern.
-                    </p>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight" x-text="heroContent.mainTitle"></h1>
+                    <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed" x-text="heroContent.description"></p>
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
                         <button @click="openPpdbModal()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-slate-900 font-bold text-base rounded-xl shadow-xl shadow-gold-500/20 transition flex items-center justify-center gap-2">
                             <span>Pendaftaran PPDB Online</span>
@@ -259,31 +256,32 @@
         </div>
     </section>
 
-    <!-- Profil & Foto Kepala Madrasah -->
+    <!-- Profil & Foto Kepala Madrasah (Dengan Nama & Jabatan) -->
     <section id="profil" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-50 px-4 py-1.5 rounded-full">Profil Madrasah</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Profil MA Mambaul Ulum Tumpang</h2>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Sambutan Kepala Madrasah</h2>
                 <div class="w-20 h-1.5 bg-gold-500 mx-auto mt-4 rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5 relative">
+                <div class="lg:col-span-5 relative text-center">
                     <div class="relative mx-auto max-w-md lg:max-w-none">
-                        <img :src="schoolInfo.kepsekPhoto || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop'" alt="Kepala Madrasah" class="rounded-3xl shadow-xl object-cover w-full h-[420px]">
+                        <img :src="schoolInfo.kepsekPhoto || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop'" alt="Kepala Madrasah" class="rounded-3xl shadow-xl object-cover w-full h-[380px]">
                         <template x-if="isAdminLoggedIn">
                             <div class="absolute bottom-3 right-3 z-10">
                                 <label class="cursor-pointer bg-slate-900 hover:bg-slate-800 text-white text-xs px-3.5 py-2 rounded-xl shadow-lg flex items-center gap-1.5 transition">
-                                    <i class="fas fa-camera text-gold-400"></i> <span>Ubah Foto Kepala</span>
+                                    <i class="fas fa-camera text-gold-400"></i> <span>Ubah Foto</span>
                                     <input type="file" accept="image/*" @change="handleKepsekPhotoUpload($event)" class="hidden">
                                 </label>
                             </div>
                         </template>
                     </div>
-                    <div class="absolute -bottom-6 -right-6 bg-emerald-800 text-white p-6 rounded-2xl shadow-xl hidden sm:block">
-                        <p class="font-arabic text-xl text-gold-400">اَلْعِلْمُ نُؤْرٌ</p>
-                        <p class="text-xs text-emerald-100 italic mt-1">"Ilmu Adalah Cahaya Penerang Jiwa"</p>
+                    <!-- Keterangan Nama & Jabatan Kepala Madrasah -->
+                    <div class="mt-4 bg-emerald-900 text-white p-4 rounded-2xl shadow-md inline-block w-full">
+                        <h4 class="font-bold text-base text-gold-400" x-text="schoolInfo.kepsekName || 'Nama Kepala Sekolah, S.Pd.'"></h4>
+                        <p class="text-xs text-emerald-200 mt-0.5" x-text="schoolInfo.kepsekTitle || 'Kepala Madrasah Aliyah Mambaul Ulum'"></p>
                     </div>
                 </div>
                 <div class="lg:col-span-7 space-y-6">
@@ -302,6 +300,43 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dewan Guru & Staf (Fitur Baru: Foto Upload Langsung, Nama & Jabatan) -->
+    <section id="guru" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-100 px-4 py-1.5 rounded-full">Pendidik Profesional</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Dewan Guru & Staf Pengajar</h2>
+                </div>
+                <template x-if="isAdminLoggedIn">
+                    <button @click="openTeacherModal()" class="mt-4 md:mt-0 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-md">
+                        <i class="fas fa-user-plus"></i> Tambah Guru
+                    </button>
+                </template>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <template x-for="t in teachersList" :key="t.id">
+                    <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition text-center p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-emerald-100 shadow-md mb-4">
+                                <img :src="t.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop'" class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base" x-text="t.name"></h3>
+                            <p class="text-xs font-semibold text-emerald-700 mt-1" x-text="t.position"></p>
+                        </div>
+                        <template x-if="isAdminLoggedIn">
+                            <div class="mt-4 pt-3 border-t border-slate-100 flex justify-center gap-3 text-xs">
+                                <button @click="openTeacherModal(t)" class="text-amber-600 hover:text-amber-800"><i class="fas fa-edit"></i> Edit</button>
+                                <button @click="deleteTeacher(t.id)" class="text-rose-600 hover:text-rose-800"><i class="fas fa-trash"></i> Hapus</button>
+                            </div>
+                        </template>
+                    </div>
+                </template>
             </div>
         </div>
     </section>
@@ -356,12 +391,12 @@
         </div>
     </section>
 
-    <!-- Program Unggulan -->
-    <section id="program" class="py-20 bg-slate-50">
+    <!-- Program Unggulan (Bisa Upload Gambar Langsung / Ikon) -->
+    <section id="program" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
                 <div>
-                    <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-100 px-4 py-1.5 rounded-full">Program Pendidikan</span>
+                    <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-50 px-4 py-1.5 rounded-full">Program Pendidikan</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Program Unggulan Madrasah</h2>
                 </div>
                 <template x-if="isAdminLoggedIn">
@@ -375,9 +410,16 @@
                 <template x-for="item in programs" :key="item.id">
                     <div class="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 relative group flex flex-col justify-between">
                         <div>
-                            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-700 group-hover:text-white transition">
-                                <i :class="item.icon || 'fas fa-star'"></i>
-                            </div>
+                            <template x-if="item.image">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden mb-6 shadow-md border border-slate-200">
+                                    <img :src="item.image" class="w-full h-full object-cover">
+                                </div>
+                            </template>
+                            <template x-if="!item.image">
+                                <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-700 group-hover:text-white transition">
+                                    <i :class="item.icon || 'fas fa-star'"></i>
+                                </div>
+                            </template>
                             <h3 class="text-xl font-bold text-slate-900 mb-3" x-text="item.title"></h3>
                             <p class="text-slate-600 text-sm leading-relaxed mb-4" x-text="item.description"></p>
                         </div>
@@ -396,12 +438,12 @@
         </div>
     </section>
 
-    <!-- Ekstrakurikuler -->
-    <section id="ekstrakurikuler" class="py-20 bg-white">
+    <!-- Ekstrakurikuler (Bisa Upload Gambar Langsung / Ikon) -->
+    <section id="ekstrakurikuler" class="py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
                 <div>
-                    <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-50 px-4 py-1.5 rounded-full">Pengembangan Bakat</span>
+                    <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-100 px-4 py-1.5 rounded-full">Pengembangan Bakat</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Ekstrakurikuler & Minat Bakat</h2>
                 </div>
                 <template x-if="isAdminLoggedIn">
@@ -413,17 +455,24 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <template x-for="item in ekstrakurikuler" :key="item.id">
-                    <div class="bg-slate-50 border border-slate-200/90 p-6 rounded-2xl hover:border-emerald-500 transition relative flex flex-col justify-between group shadow-sm">
+                    <div class="bg-white border border-slate-200/90 p-6 rounded-2xl hover:border-emerald-500 transition relative flex flex-col justify-between group shadow-sm">
                         <div>
-                            <div class="w-12 h-12 rounded-xl bg-emerald-800 text-gold-400 flex items-center justify-center text-xl mb-4 shadow-sm group-hover:scale-110 transition">
-                                <i :class="item.icon || 'fas fa-users'"></i>
-                            </div>
+                            <template x-if="item.image">
+                                <div class="w-14 h-14 rounded-xl overflow-hidden mb-4 shadow-sm border">
+                                    <img :src="item.image" class="w-full h-full object-cover">
+                                </div>
+                            </template>
+                            <template x-if="!item.image">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-800 text-gold-400 flex items-center justify-center text-xl mb-4 shadow-sm group-hover:scale-110 transition">
+                                    <i :class="item.icon || 'fas fa-users'"></i>
+                                </div>
+                            </template>
                             <h3 class="font-bold text-lg text-slate-900" x-text="item.name"></h3>
                             <p class="text-xs text-slate-600 mt-2 leading-relaxed" x-text="item.description"></p>
                         </div>
                         <template x-if="isAdminLoggedIn">
                             <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs">
-                                <span class="text-[10px] text-slate-400 font-mono" x-text="item.icon"></span>
+                                <span class="text-[10px] text-slate-400 font-mono">Kelola Data</span>
                                 <div class="flex gap-2">
                                     <button @click="openEkskulModal(item)" class="text-amber-600 hover:text-amber-800 font-medium"><i class="fas fa-edit"></i> Edit</button>
                                     <button @click="deleteEkskul(item.id)" class="text-rose-600 hover:text-rose-800 font-medium"><i class="fas fa-trash"></i> Hapus</button>
@@ -436,7 +485,7 @@
         </div>
     </section>
 
-    <!-- Galeri Foto & Video YouTube -->
+    <!-- Galeri Foto & Video YouTube (Upload Foto Langsung) -->
     <section id="galeri" class="py-20 bg-slate-900 text-white" x-data="{ activeTab: 'photos' }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
@@ -511,7 +560,7 @@
     </section>
 
     <!-- PPDB Form Online -->
-    <section id="ppdb" class="py-20 bg-slate-50">
+    <section id="ppdb" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-100 px-4 py-1.5 rounded-full">Penerimaan Siswa Baru</span>
@@ -519,9 +568,9 @@
                 <p class="text-slate-600 mt-3 text-sm">Isi data di bawah ini secara lengkap. Data akan langsung terdaftar di sistem sekolah.</p>
             </div>
 
-            <div class="max-w-4xl mx-auto bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-xl">
+            <div class="max-w-4xl mx-auto bg-slate-50 rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-xl">
                 <form @submit.prevent="submitPpdbForm()" class="space-y-6">
-                    <div class="border-b border-slate-100 pb-4">
+                    <div class="border-b border-slate-200 pb-4">
                         <h3 class="text-lg font-bold text-emerald-800 flex items-center gap-2">
                             <i class="fas fa-user-graduate text-gold-500"></i> Identitas Calon Siswa
                         </h3>
@@ -530,26 +579,26 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Lengkap Siswa *</label>
-                            <input type="text" x-model="ppdbForm.fullName" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="Sesuai Ijazah / Akta">
+                            <input type="text" x-model="ppdbForm.fullName" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm bg-white" placeholder="Sesuai Ijazah / Akta">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">NISN (10 Digit) *</label>
-                            <input type="number" x-model="ppdbForm.nisn" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="0012345678">
+                            <input type="number" x-model="ppdbForm.nisn" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm bg-white" placeholder="0012345678">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Tempat Lahir *</label>
-                            <input type="text" x-model="ppdbForm.birthPlace" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="Malang">
+                            <input type="text" x-model="ppdbForm.birthPlace" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm bg-white" placeholder="Malang">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Tanggal Lahir *</label>
-                            <input type="date" x-model="ppdbForm.birthDate" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm">
+                            <input type="date" x-model="ppdbForm.birthDate" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm bg-white">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Jenis Kelamin *</label>
-                            <select x-model="ppdbForm.gender" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm">
+                            <select x-model="ppdbForm.gender" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm bg-white">
                                 <option value="Laki-laki">Laki-laki</option>
                                 <option value="Perempuan">Perempuan</option>
                             </select>
@@ -559,22 +608,22 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Asal Sekolah / MTs / SMP *</label>
-                            <input type="text" x-model="ppdbForm.schoolOrigin" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="Nama Sekolah Asal">
+                            <input type="text" x-model="ppdbForm.schoolOrigin" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm bg-white" placeholder="Nama Sekolah Asal">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Orang Tua / Wali *</label>
-                            <input type="text" x-model="ppdbForm.parentName" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="Nama Orang Tua">
+                            <input type="text" x-model="ppdbForm.parentName" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm bg-white" placeholder="Nama Orang Tua">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">No. WhatsApp Aktif *</label>
-                            <input type="tel" x-model="ppdbForm.phone" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="08123456789">
+                            <input type="tel" x-model="ppdbForm.phone" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm bg-white" placeholder="08123456789">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Pilihan Program *</label>
-                            <select x-model="ppdbForm.programChoice" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm">
+                            <select x-model="ppdbForm.programChoice" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm bg-white">
                                 <option value="Tahfidh Al-Qur'an">Tahfidh Al-Qur'an</option>
                                 <option value="Saintek & Riset">Saintek & Riset (KSM)</option>
                                 <option value="Keagamaan & Kitab Kuning">Keagamaan & Kitab Kuning</option>
@@ -594,11 +643,11 @@
     </section>
 
     <!-- Berita -->
-    <section id="berita" class="py-20 bg-white">
+    <section id="berita" class="py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
                 <div>
-                    <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-50 px-4 py-1.5 rounded-full">Kabar Madrasah</span>
+                    <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-100 px-4 py-1.5 rounded-full">Kabar Madrasah</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Berita & Informasi Terkini</h2>
                 </div>
                 <template x-if="isAdminLoggedIn">
@@ -706,22 +755,28 @@
                     </div>
                     <div>
                         <h3 class="font-bold text-base">CMS Dashboard - MA Mambaul Ulum Tumpang</h3>
-                        <p class="text-[11px] text-slate-400">Pengelolaan Konten, Logo, Sosmed, PPDB & Ekstrakurikuler</p>
+                        <p class="text-[11px] text-slate-400">Pengelolaan Konten, Logo, Hero Teks, Guru, PPDB & Ekstrakurikuler</p>
                     </div>
                 </div>
                 <button @click="adminModalOpen = false" class="text-slate-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
             </div>
 
-            <div class="flex-1 overflow-y-auto p-6 bg-slate-50 custom-scrollbar" x-data="{ cmsTab: 'ekskul' }">
+            <div class="flex-1 overflow-y-auto p-6 bg-slate-50 custom-scrollbar" x-data="{ cmsTab: 'hero' }">
                 <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-4 mb-6">
-                    <button @click="cmsTab = 'ekskul'" :class="cmsTab === 'ekskul' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
-                        <i class="fas fa-running"></i> Ekstrakurikuler & Icon
+                    <button @click="cmsTab = 'hero'" :class="cmsTab === 'hero' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
+                        <i class="fas fa-heading"></i> Teks Utama (Hero)
                     </button>
                     <button @click="cmsTab = 'school'" :class="cmsTab === 'school' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
-                        <i class="fas fa-school"></i> Logo & Info Sekolah
+                        <i class="fas fa-school"></i> Kepala, Logo & E-Karakter
                     </button>
-                    <button @click="cmsTab = 'socials'" :class="cmsTab === 'socials' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
-                        <i class="fas fa-share-alt"></i> Media Sosial
+                    <button @click="cmsTab = 'teachers'" :class="cmsTab === 'teachers' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
+                        <i class="fas fa-users"></i> Dewan Guru (<span x-text="teachersList.length"></span>)
+                    </button>
+                    <button @click="cmsTab = 'ekskul'" :class="cmsTab === 'ekskul' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
+                        <i class="fas fa-running"></i> Ekstrakurikuler
+                    </button>
+                    <button @click="cmsTab = 'programs'" :class="cmsTab === 'programs' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
+                        <i class="fas fa-graduation-cap"></i> Program
                     </button>
                     <button @click="cmsTab = 'notices'" :class="cmsTab === 'notices' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
                         <i class="fas fa-bullhorn"></i> Pengumuman PDF
@@ -729,199 +784,128 @@
                     <button @click="cmsTab = 'ppdb'" :class="cmsTab === 'ppdb' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
                         <i class="fas fa-id-card"></i> PPDB (<span x-text="ppdbList.length"></span>)
                     </button>
-                    <button @click="cmsTab = 'programs'" :class="cmsTab === 'programs' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
-                        <i class="fas fa-graduation-cap"></i> Program Unggulan
-                    </button>
                     <button @click="cmsTab = 'media'" :class="cmsTab === 'media' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
-                        <i class="fas fa-photo-video"></i> Galeri & YouTube
+                        <i class="fas fa-photo-video"></i> Galeri Foto
                     </button>
                 </div>
 
-                <!-- Tab Ekstrakurikuler -->
-                <div x-show="cmsTab === 'ekskul'" class="space-y-6">
-                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+                <!-- Tab Hero Teks Utama -->
+                <div x-show="cmsTab === 'hero'" class="space-y-4 max-w-2xl">
+                    <h4 class="font-bold text-slate-800 text-sm">Edit Kata-kata di Tampilan Utama (Hero Section)</h4>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4 text-xs">
                         <div>
-                            <h4 class="font-bold text-slate-800 text-sm">Kelola Ekstrakurikuler & Icon FontAwesome</h4>
-                            <p class="text-xs text-slate-500">Ubah nama, deskripsi, serta ganti icon kegiatan ekstrakurikuler.</p>
+                            <label class="block font-semibold mb-1 text-slate-700">Teks Badge (Paling Atas)</label>
+                            <input type="text" x-model="heroContent.badgeText" class="w-full px-3 py-2 rounded-xl border">
                         </div>
-                        <button @click="openEkskulModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
-                            <i class="fas fa-plus"></i> Tambah Ekstrakurikuler Baru
-                        </button>
+                        <div>
+                            <label class="block font-semibold mb-1 text-slate-700">Judul Utama (Membentuk Generasi...)</label>
+                            <textarea rows="2" x-model="heroContent.mainTitle" class="w-full px-3 py-2 rounded-xl border"></textarea>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1 text-slate-700">Paragraf Sambutan/Deskripsi</label>
+                            <textarea rows="3" x-model="heroContent.description" class="w-full px-3 py-2 rounded-xl border"></textarea>
+                        </div>
+                        <button @click="saveToStorage(); showToast('Berhasil', 'Teks utama diperbarui.');" class="px-5 py-2.5 bg-emerald-700 text-white rounded-xl font-bold shadow-md">Simpan Teks Utama</button>
                     </div>
+                </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <template x-for="e in ekstrakurikuler" :key="e.id">
-                            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center gap-3 mb-3">
-                                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg">
-                                            <i :class="e.icon || 'fas fa-users'"></i>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-bold text-slate-900 text-sm" x-text="e.name"></h5>
-                                            <span class="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" x-text="e.icon"></span>
-                                        </div>
-                                    </div>
-                                    <p class="text-xs text-slate-600 line-clamp-2" x-text="e.description"></p>
+                <!-- Tab School Info, Kepala Sekolah & E-Karakter URL -->
+                <div x-show="cmsTab === 'school'" class="space-y-6 max-w-3xl">
+                    <h4 class="font-bold text-slate-800 text-sm">Pengaturan Kepala Madrasah, Logo & Link E-Karakter</h4>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 text-xs">
+                        <!-- Foto Kepala -->
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-2">Foto Kepala Madrasah</label>
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-20 rounded-xl border bg-slate-50 overflow-hidden shrink-0">
+                                    <template x-if="schoolInfo.kepsekPhoto"><img :src="schoolInfo.kepsekPhoto" class="w-full h-full object-cover"></template>
                                 </div>
-                                <div class="mt-4 pt-3 border-t border-slate-100 flex justify-end gap-2 text-xs">
-                                    <button @click="openEkskulModal(e)" class="px-3 py-1 bg-amber-50 text-amber-700 rounded-lg hover:bg-amber-100"><i class="fas fa-edit mr-1"></i> Edit Icon & Data</button>
-                                    <button @click="deleteEkskul(e.id)" class="px-2 py-1 text-rose-600 hover:text-rose-800"><i class="fas fa-trash"></i></button>
+                                <input type="file" accept="image/*" @change="handleKepsekPhotoUpload($event)" class="text-xs text-slate-500">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold mb-1 text-slate-700">Nama Kepala Madrasah</label>
+                                <input type="text" x-model="schoolInfo.kepsekName" class="w-full px-3 py-2 rounded-xl border">
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-1 text-slate-700">Jabatan / Gelar</label>
+                                <input type="text" x-model="schoolInfo.kepsekTitle" class="w-full px-3 py-2 rounded-xl border">
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div>
+                            <label class="block font-semibold mb-1 text-slate-700">Link URL Tombol E-Karakter</label>
+                            <input type="url" x-model="schoolInfo.ekarakterUrl" class="w-full px-3 py-2 rounded-xl border" placeholder="https://script.google.com/...">
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1 text-slate-700">Nama Sekolah</label>
+                            <input type="text" x-model="schoolInfo.name" class="w-full px-3 py-2 rounded-xl border font-bold">
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1 text-slate-700">Tagline</label>
+                            <input type="text" x-model="schoolInfo.tagline" class="w-full px-3 py-2 rounded-xl border">
+                        </div>
+                        <button @click="saveToStorage(); showToast('Tersimpan', 'Informasi berhasil diperbarui.');" class="px-5 py-2.5 bg-emerald-700 text-white rounded-xl font-bold shadow-md">Simpan Perubahan</button>
+                    </div>
+                </div>
+
+                <!-- Tab Dewan Guru -->
+                <div x-show="cmsTab === 'teachers'" class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-slate-800 text-sm">Kelola Data Dewan Guru & Staf</h4>
+                        <button @click="openTeacherModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-user-plus mr-1"></i> Tambah Guru</button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <template x-for="t in teachersList" :key="t.id">
+                            <div class="bg-white p-4 rounded-xl border flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img :src="t.photo" class="w-12 h-12 rounded-full object-cover">
+                                    <div>
+                                        <h5 class="font-bold text-slate-900 text-xs" x-text="t.name"></h5>
+                                        <p class="text-[11px] text-emerald-700" x-text="t.position"></p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button @click="openTeacherModal(t)" class="text-amber-600 text-xs"><i class="fas fa-edit"></i></button>
+                                    <button @click="deleteTeacher(t.id)" class="text-rose-600 text-xs"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
                         </template>
                     </div>
                 </div>
 
-                <!-- Tab School Info & Logo -->
-                <div x-show="cmsTab === 'school'" class="space-y-6 max-w-3xl">
-                    <h4 class="font-bold text-slate-800 text-sm">Pengaturan Logo, Info & Link URL Login E-Karakter</h4>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-2">Logo Sekolah</label>
-                            <div class="flex items-center gap-4">
-                                <div class="w-16 h-16 rounded-2xl border border-slate-200 bg-slate-50 flex items-center justify-center p-2 shrink-0">
-                                    <template x-if="schoolInfo.logoUrl">
-                                        <img :src="schoolInfo.logoUrl" class="w-full h-full object-contain">
-                                    </template>
-                                    <template x-if="!schoolInfo.logoUrl">
-                                        <i class="fas fa-mosque text-3xl text-emerald-700"></i>
-                                    </template>
+                <!-- Tab Ekstrakurikuler -->
+                <div x-show="cmsTab === 'ekskul'" class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-slate-800 text-sm">Kelola Ekstrakurikuler (Upload Foto/Ikon)</h4>
+                        <button @click="openEkskulModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-plus mr-1"></i> Tambah Ekskul</button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <template x-for="e in ekstrakurikuler" :key="e.id">
+                            <div class="bg-white p-4 rounded-xl border flex justify-between items-center">
+                                <div>
+                                    <h5 class="font-bold text-slate-900 text-xs" x-text="e.name"></h5>
+                                    <p class="text-[11px] text-slate-500 line-clamp-1" x-text="e.description"></p>
                                 </div>
-                                <div class="space-y-2 flex-1">
-                                    <input type="file" accept="image/*" @change="handleLogoUpload($event)" class="text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
+                                <div class="flex gap-2">
+                                    <button @click="openEkskulModal(e)" class="text-amber-600 text-xs"><i class="fas fa-edit"></i></button>
+                                    <button @click="deleteEkskul(e.id)" class="text-rose-600 text-xs"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Sekolah</label>
-                            <input type="text" x-model="schoolInfo.name" class="w-full px-3 py-2 rounded-xl border text-xs font-bold">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Tagline / Sub-nama</label>
-                            <input type="text" x-model="schoolInfo.tagline" class="w-full px-3 py-2 rounded-xl border text-xs">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Link URL Tombol Login E-Karakter (Input Manual)</label>
-                            <input type="url" x-model="schoolInfo.ekarakterUrl" class="w-full px-3 py-2 rounded-xl border text-xs" placeholder="https://script.google.com/...">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Alamat Lengkap</label>
-                            <input type="text" x-model="schoolInfo.address" class="w-full px-3 py-2 rounded-xl border text-xs">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor WhatsApp Direct</label>
-                            <input type="text" x-model="schoolInfo.phone" class="w-full px-3 py-2 rounded-xl border text-xs">
-                        </div>
-
-                        <button @click="saveToStorage(); showToast('Informasi Tersimpan', 'Perubahan telah disinkronkan.');" class="px-5 py-2.5 bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md">Simpan Informasi</button>
+                        </template>
                     </div>
                 </div>
 
-                <!-- Tab Socials -->
-                <div x-show="cmsTab === 'socials'" class="space-y-6 max-w-2xl">
-                    <h4 class="font-bold text-slate-800 text-sm">Pengaturan Link Media Sosial</h4>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 text-xs">
-                        <div>
-                            <label class="block font-semibold mb-1 text-slate-700"><i class="fab fa-whatsapp text-emerald-600 mr-1.5"></i> Link WhatsApp</label>
-                            <input type="text" x-model="socials.wa" class="w-full px-3 py-2 rounded-xl border">
-                        </div>
-                        <div>
-                            <label class="block font-semibold mb-1 text-slate-700"><i class="fab fa-instagram text-pink-600 mr-1.5"></i> Link Instagram</label>
-                            <input type="text" x-model="socials.ig" class="w-full px-3 py-2 rounded-xl border">
-                        </div>
-                        <div>
-                            <label class="block font-semibold mb-1 text-slate-700"><i class="fab fa-facebook text-blue-600 mr-1.5"></i> Link Facebook</label>
-                            <input type="text" x-model="socials.fb" class="w-full px-3 py-2 rounded-xl border">
-                        </div>
-                        <div>
-                            <label class="block font-semibold mb-1 text-slate-700"><i class="fab fa-youtube text-red-600 mr-1.5"></i> Link YouTube</label>
-                            <input type="text" x-model="socials.yt" class="w-full px-3 py-2 rounded-xl border">
-                        </div>
-                        <button @click="saveToStorage(); showToast('Media Sosial Tersimpan', 'Link sosmed berhasil disinkronkan.');" class="px-5 py-2.5 bg-emerald-700 text-white rounded-xl font-bold shadow-md">Simpan Sosmed</button>
-                    </div>
-                </div>
-
-                <!-- Tab Notices -->
-                <div x-show="cmsTab === 'notices'" class="space-y-6">
-                    <div class="flex justify-between items-center">
-                        <h4 class="font-bold text-slate-800 text-sm">Kelola Pengumuman (Upload File PDF)</h4>
-                        <button @click="openNoticeModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-file-upload mr-1"></i> Upload PDF</button>
-                    </div>
-                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                        <table class="w-full text-left text-xs text-slate-700">
-                            <thead class="bg-slate-100 font-bold border-b">
-                                <tr>
-                                    <th class="p-3">Tanggal</th>
-                                    <th class="p-3">Judul Pengumuman</th>
-                                    <th class="p-3 text-right">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100">
-                                <template x-for="item in notices" :key="item.id">
-                                    <tr class="hover:bg-slate-50">
-                                        <td class="p-3 font-semibold text-emerald-800" x-text="item.date"></td>
-                                        <td class="p-3 font-bold text-slate-900" x-text="item.title"></td>
-                                        <td class="p-3 text-right space-x-2">
-                                            <button @click="viewPdf(item.pdfUrl, item.title)" class="text-emerald-700 font-semibold"><i class="fas fa-eye"></i> View</button>
-                                            <button @click="deleteNotice(item.id)" class="text-rose-600"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                </template>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Tab PPDB List -->
-                <div x-show="cmsTab === 'ppdb'" class="space-y-4">
-                    <div class="flex justify-between items-center">
-                        <h4 class="font-bold text-slate-800 text-sm">Daftar Pendaftar PPDB Online</h4>
-                        <div class="flex gap-2">
-                            <button @click="exportPpdbCsv()" class="px-3 py-1.5 bg-emerald-700 text-white rounded-lg text-xs font-semibold"><i class="fas fa-file-csv mr-1"></i> Export CSV</button>
-                            <button @click="clearAllPpdbData()" class="text-xs text-rose-600 border border-rose-200 px-3 py-1.5 rounded-lg">Hapus Semua</button>
-                        </div>
-                    </div>
-                    <div class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm">
-                        <table class="w-full text-left text-xs text-slate-700">
-                            <thead class="bg-slate-100 font-bold text-slate-800 border-b">
-                                <tr>
-                                    <th class="p-3">Nama</th>
-                                    <th class="p-3">NISN</th>
-                                    <th class="p-3">Asal Sekolah</th>
-                                    <th class="p-3">Program</th>
-                                    <th class="p-3">WhatsApp</th>
-                                    <th class="p-3 text-right">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100">
-                                <template x-for="item in ppdbList" :key="item.id">
-                                    <tr class="hover:bg-slate-50">
-                                        <td class="p-3 font-semibold text-slate-900" x-text="item.fullName"></td>
-                                        <td class="p-3" x-text="item.nisn"></td>
-                                        <td class="p-3" x-text="item.schoolOrigin"></td>
-                                        <td class="p-3" x-text="item.programChoice"></td>
-                                        <td class="p-3 text-emerald-700 font-medium" x-text="item.phone"></td>
-                                        <td class="p-3 text-right">
-                                            <button @click="deletePpdbItem(item.id)" class="text-rose-600"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                </template>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Tab Programs -->
+                <!-- Tab Program -->
                 <div x-show="cmsTab === 'programs'" class="space-y-4">
                     <button @click="openProgramModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-plus"></i> Tambah Program</button>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <template x-for="p in programs" :key="p.id">
-                            <div class="bg-white p-4 rounded-xl border border-slate-200 flex justify-between items-center">
+                            <div class="bg-white p-4 rounded-xl border flex justify-between items-center">
                                 <div>
-                                    <h5 class="font-bold text-slate-900 text-sm" x-text="p.title"></h5>
-                                    <p class="text-xs text-slate-500 line-clamp-1" x-text="p.description"></p>
+                                    <h5 class="font-bold text-slate-900 text-xs" x-text="p.title"></h5>
+                                    <p class="text-[11px] text-slate-500 line-clamp-1" x-text="p.description"></p>
                                 </div>
                                 <div class="flex gap-2">
                                     <button @click="openProgramModal(p)" class="text-amber-600 text-xs"><i class="fas fa-edit"></i></button>
@@ -932,43 +916,96 @@
                     </div>
                 </div>
 
+                <!-- Tab Notices -->
+                <div x-show="cmsTab === 'notices'" class="space-y-4">
+                    <button @click="openNoticeModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-file-upload"></i> Upload PDF Pengumuman</button>
+                </div>
+
+                <!-- Tab PPDB List -->
+                <div x-show="cmsTab === 'ppdb'" class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-slate-800 text-sm">Daftar Pendaftar PPDB</h4>
+                        <button @click="exportPpdbCsv()" class="px-3 py-1.5 bg-emerald-700 text-white rounded-lg text-xs font-semibold"><i class="fas fa-file-csv mr-1"></i> Export CSV</button>
+                    </div>
+                </div>
+
                 <!-- Tab Media Gallery -->
                 <div x-show="cmsTab === 'media'" class="space-y-4">
-                    <button @click="openGalleryModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-plus"></i> Tambah Foto / Video YouTube</button>
-                    <p class="text-xs text-slate-500">Kelola album dokumentasi foto dan video YouTube madrasah.</p>
+                    <button @click="openGalleryModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-plus"></i> Tambah Foto Galeri</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal Add/Edit Guru -->
+    <div x-show="teacherModalOpen" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl" @click.away="teacherModalOpen = false">
+            <h3 class="font-bold text-slate-900 text-lg mb-4" x-text="editingTeacher.id ? 'Edit Data Guru' : 'Tambah Guru Baru'"></h3>
+            <form @submit.prevent="saveTeacher()" class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-semibold mb-1">Nama Lengkap & Gelar *</label>
+                    <input type="text" x-model="editingTeacher.name" required class="w-full px-3 py-2 border rounded-xl">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Jabatan / Mata Pelajaran *</label>
+                    <input type="text" x-model="editingTeacher.position" required class="w-full px-3 py-2 border rounded-xl" placeholder="e.g. Guru Fiqih / Wali Kelas">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Upload Foto Guru *</label>
+                    <input type="file" accept="image/*" @change="handleTeacherPhotoUpload($event)" class="w-full text-xs">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" @click="teacherModalOpen = false" class="px-4 py-2 rounded-xl text-slate-600">Batal</button>
+                    <button type="submit" class="px-5 py-2 bg-emerald-700 text-white font-bold rounded-xl">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Modal Add/Edit Ekstrakurikuler -->
     <div x-show="ekskulModalOpen" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar" @click.away="ekskulModalOpen = false">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative" @click.away="ekskulModalOpen = false">
             <h3 class="font-bold text-slate-900 text-lg mb-4" x-text="editingEkskul.id ? 'Edit Ekstrakurikuler' : 'Tambah Ekstrakurikuler'"></h3>
             <form @submit.prevent="saveEkskul()" class="space-y-4 text-xs">
                 <div>
-                    <label class="block font-semibold text-slate-700 mb-1">Nama Ekstrakurikuler *</label>
+                    <label class="block font-semibold mb-1">Nama Ekstrakurikuler *</label>
                     <input type="text" x-model="editingEkskul.name" required class="w-full px-3 py-2 border rounded-xl">
                 </div>
                 <div>
-                    <label class="block font-semibold text-slate-700 mb-1">Pilih Icon FontAwesome</label>
-                    <div class="grid grid-cols-6 gap-2 p-3 bg-slate-50 border rounded-xl mb-2">
-                        <template x-for="iconClass in availableIcons" :key="iconClass">
-                            <button type="button" @click="editingEkskul.icon = iconClass" 
-                                    class="w-10 h-10 rounded-xl border flex items-center justify-center text-base transition"
-                                    :class="editingEkskul.icon === iconClass ? 'bg-emerald-700 text-gold-400 border-emerald-800 scale-105' : 'bg-white text-slate-700 hover:bg-slate-100'">
-                                <i :class="iconClass"></i>
-                            </button>
-                        </template>
-                    </div>
-                    <input type="text" x-model="editingEkskul.icon" required class="w-full px-3 py-2 border rounded-xl font-mono text-xs" placeholder="e.g. fas fa-futbol">
+                    <label class="block font-semibold mb-1">Upload Gambar / Foto Ekskul (Opsional)</label>
+                    <input type="file" accept="image/*" @change="handleEkskulImageUpload($event)" class="w-full text-xs">
                 </div>
                 <div>
-                    <label class="block font-semibold text-slate-700 mb-1">Deskripsi Kegiatan</label>
+                    <label class="block font-semibold mb-1">Deskripsi Kegiatan</label>
                     <textarea rows="3" x-model="editingEkskul.description" required class="w-full px-3 py-2 border rounded-xl"></textarea>
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" @click="ekskulModalOpen = false" class="px-4 py-2 rounded-xl text-slate-600">Batal</button>
+                    <button type="submit" class="px-5 py-2 bg-emerald-700 text-white font-bold rounded-xl">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Add Program -->
+    <div x-show="programModalOpen" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative" @click.away="programModalOpen = false">
+            <h3 class="font-bold text-slate-900 text-lg mb-4" x-text="editingProgram.id ? 'Edit Program' : 'Tambah Program'"></h3>
+            <form @submit.prevent="saveProgram()" class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-semibold mb-1">Judul Program</label>
+                    <input type="text" x-model="editingProgram.title" required class="w-full px-3 py-2 border rounded-xl">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Upload Gambar / Icon (Opsional)</label>
+                    <input type="file" accept="image/*" @change="handleProgramImageUpload($event)" class="w-full text-xs">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Deskripsi</label>
+                    <textarea rows="3" x-model="editingProgram.description" required class="w-full px-3 py-2 border rounded-xl"></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" @click="programModalOpen = false" class="px-4 py-2 rounded-xl text-slate-600">Batal</button>
                     <button type="submit" class="px-5 py-2 bg-emerald-700 text-white font-bold rounded-xl">Simpan</button>
                 </div>
             </form>
@@ -985,16 +1022,8 @@
                     <input type="text" x-model="editingNotice.title" required class="w-full px-3 py-2 border rounded-xl">
                 </div>
                 <div>
-                    <label class="block font-semibold mb-1">Tanggal</label>
-                    <input type="text" x-model="editingNotice.date" required class="w-full px-3 py-2 border rounded-xl">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1">Deskripsi Singkat</label>
-                    <textarea rows="2" x-model="editingNotice.description" class="w-full px-3 py-2 border rounded-xl"></textarea>
-                </div>
-                <div>
                     <label class="block font-semibold mb-1">Upload File PDF *</label>
-                    <input type="file" accept="application/pdf" @change="handlePdfUpload($event)" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-emerald-50 file:text-emerald-700">
+                    <input type="file" accept="application/pdf" @change="handlePdfUpload($event)" class="w-full text-xs">
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" @click="noticeModalOpen = false" class="px-4 py-2 rounded-xl text-slate-600">Batal</button>
@@ -1015,50 +1044,25 @@
         </div>
     </div>
 
-    <!-- Modal Add Program -->
-    <div x-show="programModalOpen" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative" @click.away="programModalOpen = false">
-            <h3 class="font-bold text-slate-900 text-lg mb-4" x-text="editingProgram.id ? 'Edit Program' : 'Tambah Program'"></h3>
-            <form @submit.prevent="saveProgram()" class="space-y-4 text-xs">
-                <div>
-                    <label class="block font-semibold mb-1">Judul Program</label>
-                    <input type="text" x-model="editingProgram.title" required class="w-full px-3 py-2 border rounded-xl">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1">Ikon (FontAwesome)</label>
-                    <input type="text" x-model="editingProgram.icon" class="w-full px-3 py-2 border rounded-xl">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1">Deskripsi</label>
-                    <textarea rows="3" x-model="editingProgram.description" required class="w-full px-3 py-2 border rounded-xl"></textarea>
-                </div>
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" @click="programModalOpen = false" class="px-4 py-2 rounded-xl text-slate-600">Batal</button>
-                    <button type="submit" class="px-5 py-2 bg-emerald-700 text-white font-bold rounded-xl">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal Add Media Gallery / YouTube -->
+    <!-- Modal Add Media Gallery -->
     <div x-show="galleryModalOpen" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative" @click.away="galleryModalOpen = false">
-            <h3 class="font-bold text-slate-900 text-lg mb-4">Tambah Media Foto / YouTube</h3>
+            <h3 class="font-bold text-slate-900 text-lg mb-4">Tambah Media Galeri</h3>
             <form @submit.prevent="saveMediaItem()" class="space-y-4 text-xs">
                 <div>
                     <label class="block font-semibold mb-1">Tipe Media</label>
                     <select x-model="editingMedia.type" class="w-full px-3 py-2 border rounded-xl">
-                        <option value="photo">Foto (URL Gambar)</option>
+                        <option value="photo">Upload Foto Langsung</option>
                         <option value="video">Video YouTube</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block font-semibold mb-1">Judul</label>
+                    <label class="block font-semibold mb-1">Judul Keterangan</label>
                     <input type="text" x-model="editingMedia.title" required class="w-full px-3 py-2 border rounded-xl">
                 </div>
                 <div x-show="editingMedia.type === 'photo'">
-                    <label class="block font-semibold mb-1">URL Foto</label>
-                    <input type="url" x-model="editingMedia.url" class="w-full px-3 py-2 border rounded-xl">
+                    <label class="block font-semibold mb-1">Pilih File Foto</label>
+                    <input type="file" accept="image/*" @change="handleGalleryPhotoUpload($event)" class="w-full text-xs">
                 </div>
                 <div x-show="editingMedia.type === 'video'">
                     <label class="block font-semibold mb-1">URL YouTube</label>
@@ -1088,16 +1092,16 @@
                 adminModalOpen: false,
                 programModalOpen: false,
                 ekskulModalOpen: false,
+                teacherModalOpen: false,
                 galleryModalOpen: false,
                 noticeModalOpen: false,
                 pdfViewerModalOpen: false,
 
-                availableIcons: [
-                    'fas fa-futbol', 'fas fa-drum', 'fas fa-quran', 'fas fa-laptop-code',
-                    'fas fa-palette', 'fas fa-music', 'fas fa-briefcase-medical',
-                    'fas fa-user-ninja', 'fas fa-campground', 'fas fa-chess',
-                    'fas fa-volleyball-ball', 'fas fa-microphone'
-                ],
+                heroContent: {
+                    badgeText: 'Madrasah Aliyah Berbasis Pesantren & Digital',
+                    mainTitle: 'Membentuk Generasi Islami, Berprestasi & Berteknologi',
+                    description: 'Selamat datang di MA Mambaul Ulum Tumpang Malang. Kami memadukan keunggulan ilmu syari\'at pesantren, kurikulum nasional, program Tahfidh Qur\'an, dan teknologi modern.'
+                },
 
                 schoolInfo: {
                     name: 'MA MAMBAUL ULUM',
@@ -1106,19 +1110,15 @@
                     phone: '+62 812-3456-7890',
                     logoUrl: '',
                     kepsekPhoto: '',
+                    kepsekName: 'Drs. H. Ahmad Fauzi, M.Pd.I',
+                    kepsekTitle: 'Kepala Madrasah Aliyah Mambaul Ulum',
                     ekarakterUrl: 'https://script.google.com/'
                 },
 
-                socials: {
-                    wa: 'https://wa.me/6281234567890',
-                    ig: 'https://instagram.com',
-                    fb: 'https://facebook.com',
-                    yt: 'https://youtube.com',
-                    tw: 'https://twitter.com'
-                },
-
+                socials: { wa: '#', ig: '#', fb: '#', yt: '#', tw: '#' },
                 programs: [],
                 ekstrakurikuler: [],
+                teachersList: [],
                 galleryPhotos: [],
                 galleryVideos: [],
                 ppdbList: [],
@@ -1128,12 +1128,10 @@
                 currentPdfUrl: '',
                 currentPdfTitle: '',
 
-                ppdbForm: {
-                    fullName: '', nisn: '', birthPlace: '', birthDate: '', gender: 'Laki-laki',
-                    schoolOrigin: '', parentName: '', phone: '', programChoice: 'Tahfidh Al-Qur\'an', status: 'Pending'
-                },
-                editingProgram: { id: null, title: '', icon: '', description: '', badge: '' },
-                editingEkskul: { id: null, name: '', icon: 'fas fa-futbol', description: '' },
+                ppdbForm: { fullName: '', nisn: '', birthPlace: '', birthDate: '', gender: 'Laki-laki', schoolOrigin: '', parentName: '', phone: '', programChoice: 'Tahfidh Al-Qur\'an', status: 'Pending' },
+                editingProgram: { id: null, title: '', icon: 'fas fa-star', image: '', description: '', badge: 'Unggulan' },
+                editingEkskul: { id: null, name: '', icon: 'fas fa-futbol', image: '', description: '' },
+                editingTeacher: { id: null, name: '', position: '', photo: '' },
                 editingMedia: { type: 'photo', title: '', url: '', youtubeUrl: '' },
                 editingNotice: { id: null, title: '', date: '', description: '', pdfUrl: '' },
 
@@ -1148,10 +1146,12 @@
                     db.ref('ma_cms_data').on('value', (snapshot) => {
                         const data = snapshot.val();
                         if (data) {
+                            if (data.heroContent) this.heroContent = data.heroContent;
                             if (data.schoolInfo) this.schoolInfo = data.schoolInfo;
                             if (data.socials) this.socials = data.socials;
                             if (data.programs) this.programs = data.programs;
                             if (data.ekstrakurikuler) this.ekstrakurikuler = data.ekstrakurikuler;
+                            if (data.teachersList) this.teachersList = data.teachersList;
                             if (data.galleryPhotos) this.galleryPhotos = data.galleryPhotos;
                             if (data.galleryVideos) this.galleryVideos = data.galleryVideos;
                             if (data.notices) this.notices = data.notices;
@@ -1161,44 +1161,33 @@
                             this.loadDefaultData();
                             this.saveToStorage();
                         }
-                    }, (error) => {
-                        this.loadDefaultData();
-                    });
+                    }, (error) => { this.loadDefaultData(); });
                 },
 
                 loadDefaultData() {
                     this.programs = [
-                        { id: 1, title: 'Tahfidh Al-Qur\'an 10-30 Juz', icon: 'fas fa-quran', description: 'Program bimbingan hafalan Al-Qur\'an terstruktur dengan metode setoran rutin.', badge: 'Favorit' },
-                        { id: 2, title: 'Kelas Riset & Saintek', icon: 'fas fa-flask', description: 'Fokus persiapan KSM, OSN, dan eksperimen ilmiah remaja.', badge: 'Olimpiade' },
-                        { id: 3, title: 'Penguasaan Kitab Kuning', icon: 'fas fa-book-quran', description: 'Kajian nahwu, shorof, fiqih, dan aqidah pesantren salaf.', badge: 'Pesantren' }
+                        { id: 1, title: 'Tahfidh Al-Qur\'an 10-30 Juz', icon: 'fas fa-quran', image: '', description: 'Program bimbingan hafalan Al-Qur\'an terstruktur.', badge: 'Favorit' },
+                        { id: 2, title: 'Kelas Riset & Saintek', icon: 'fas fa-flask', image: '', description: 'Fokus persiapan KSM dan eksperimen ilmiah.', badge: 'Olimpiade' }
                     ];
-
                     this.ekstrakurikuler = [
-                        { id: 1, name: 'Seni Hadrah & Sholawat', icon: 'fas fa-drum', description: 'Seni musik melantunkan sholawat kebanggaan santri.' },
-                        { id: 2, name: 'Pencak Silat Pagar Nusa', icon: 'fas fa-user-ninja', description: 'Bela diri kebanggaan NU untuk kesehatan & olah jiwa.' },
-                        { id: 3, name: 'English & Arabic Club', icon: 'fas fa-microphone', description: 'Latihan public speaking dan pidato 3 bahasa.' },
-                        { id: 4, name: 'Pramuka & PMR', icon: 'fas fa-campground', description: 'Pendidikan karakter, kedisiplinan, dan pertolongan pertama.' }
+                        { id: 1, name: 'Seni Hadrah & Sholawat', icon: 'fas fa-drum', image: '', description: 'Seni musik melantunkan sholawat kebanggaan santri.' }
                     ];
-
+                    this.teachersList = [
+                        { id: 1, name: 'Ust. Muhammad Ali, S.Pd', position: 'Wali Kelas & Guru Al-Qur\'an', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' }
+                    ];
                     this.galleryPhotos = [
-                        { id: 1, title: 'Gedung & Lingkungan Asri', url: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop', caption: 'Suasana belajar nyaman.' }
-                    ];
-
-                    this.galleryVideos = [
-                        { id: 1, title: 'Profil MA Mambaul Ulum Tumpang', youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', description: 'Video keunggulan madrasah.' }
-                    ];
-
-                    this.notices = [
-                        { id: 1, title: 'Jadwal Tes Seleksi PPDB Gelombang I', date: '28 Sep 2026', description: 'Informasi pelaksanaan ujian seleksi santri baru.', pdfUrl: '' }
+                        { id: 1, title: 'Gedung Madrasah', url: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop', caption: 'Suasana belajar.' }
                     ];
                 },
 
                 saveToStorage() {
                     const payload = {
+                        heroContent: this.heroContent,
                         schoolInfo: this.schoolInfo,
                         socials: this.socials,
                         programs: this.programs,
                         ekstrakurikuler: this.ekstrakurikuler,
+                        teachersList: this.teachersList,
                         galleryPhotos: this.galleryPhotos,
                         galleryVideos: this.galleryVideos,
                         notices: this.notices,
@@ -1212,62 +1201,78 @@
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = (event) => {
-                            this.schoolInfo.logoUrl = event.target.result;
-                            this.saveToStorage();
-                            this.showToast('Logo Diperbarui', 'Logo sekolah berhasil disimpan.');
-                        };
+                        reader.onload = (event) => { this.schoolInfo.logoUrl = event.target.result; this.saveToStorage(); this.showToast('Sukses', 'Logo diperbarui.'); };
                         reader.readAsDataURL(file);
                     }
                 },
-
                 handleKepsekPhotoUpload(e) {
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = (event) => {
-                            this.schoolInfo.kepsekPhoto = event.target.result;
-                            this.saveToStorage();
-                            this.showToast('Foto Kepala Berhasil', 'Foto kepala madrasah telah diperbarui.');
-                        };
+                        reader.onload = (event) => { this.schoolInfo.kepsekPhoto = event.target.result; this.saveToStorage(); this.showToast('Sukses', 'Foto Kepala Madrasah diperbarui.'); };
                         reader.readAsDataURL(file);
                     }
                 },
-
+                handleTeacherPhotoUpload(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => { this.editingTeacher.photo = event.target.result; };
+                        reader.readAsDataURL(file);
+                    }
+                },
+                handleEkskulImageUpload(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => { this.editingEkskul.image = event.target.result; };
+                        reader.readAsDataURL(file);
+                    }
+                },
+                handleProgramImageUpload(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => { this.editingProgram.image = event.target.result; };
+                        reader.readAsDataURL(file);
+                    }
+                },
+                handleGalleryPhotoUpload(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => { this.editingMedia.url = event.target.result; };
+                        reader.readAsDataURL(file);
+                    }
+                },
                 handlePdfUpload(e) {
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = (event) => {
-                            this.editingNotice.pdfUrl = event.target.result;
-                        };
+                        reader.onload = (event) => { this.editingNotice.pdfUrl = event.target.result; };
                         reader.readAsDataURL(file);
                     }
                 },
 
-                openNoticeModal() {
-                    this.editingNotice = { id: null, title: '', date: new Date().toLocaleDateString('id-ID'), description: '', pdfUrl: '' };
-                    this.noticeModalOpen = true;
+                openTeacherModal(item = null) {
+                    this.editingTeacher = item ? { ...item } : { id: null, name: '', position: '', photo: '' };
+                    this.teacherModalOpen = true;
                 },
-                saveNotice() {
-                    this.notices.unshift({ ...this.editingNotice, id: Date.now() });
-                    this.saveToStorage();
-                    this.noticeModalOpen = false;
-                    this.showToast('Pengumuman Disimpan', 'File PDF berhasil di-upload.');
+                saveTeacher() {
+                    if (this.editingTeacher.id) {
+                        const idx = this.teachersList.findIndex(t => t.id === this.editingTeacher.id);
+                        if (idx !== -1) this.teachersList[idx] = { ...this.editingTeacher };
+                    } else {
+                        this.teachersList.push({ ...this.editingTeacher, id: Date.now() });
+                    }
+                    this.saveToStorage(); this.teacherModalOpen = false; this.showToast('Tersimpan', 'Data guru berhasil diperbarui.');
                 },
-                deleteNotice(id) {
-                    this.notices = this.notices.filter(n => n.id !== id);
-                    this.saveToStorage();
-                },
-                viewPdf(url, title) {
-                    if (!url) { alert('File PDF belum ada.'); return; }
-                    this.currentPdfUrl = url;
-                    this.currentPdfTitle = title;
-                    this.pdfViewerModalOpen = true;
+                deleteTeacher(id) {
+                    this.teachersList = this.teachersList.filter(t => t.id !== id); this.saveToStorage();
                 },
 
                 openEkskulModal(item = null) {
-                    this.editingEkskul = item ? { ...item } : { id: null, name: '', icon: 'fas fa-futbol', description: '' };
+                    this.editingEkskul = item ? { ...item } : { id: null, name: '', icon: 'fas fa-futbol', image: '', description: '' };
                     this.ekskulModalOpen = true;
                 },
                 saveEkskul() {
@@ -1277,17 +1282,12 @@
                     } else {
                         this.ekstrakurikuler.push({ ...this.editingEkskul, id: Date.now() });
                     }
-                    this.saveToStorage();
-                    this.ekskulModalOpen = false;
-                    this.showToast('Ekstrakurikuler Disimpan', 'Data berhasil diperbarui.');
+                    this.saveToStorage(); this.ekskulModalOpen = false; this.showToast('Tersimpan', 'Ekstrakurikuler diperbarui.');
                 },
-                deleteEkskul(id) {
-                    this.ekstrakurikuler = this.ekstrakurikuler.filter(e => e.id !== id);
-                    this.saveToStorage();
-                },
+                deleteEkskul(id) { this.ekstrakurikuler = this.ekstrakurikuler.filter(e => e.id !== id); this.saveToStorage(); },
 
                 openProgramModal(item = null) {
-                    this.editingProgram = item ? { ...item } : { id: null, title: '', icon: 'fas fa-star', description: '', badge: 'Unggulan' };
+                    this.editingProgram = item ? { ...item } : { id: null, title: '', icon: 'fas fa-star', image: '', description: '', badge: 'Unggulan' };
                     this.programModalOpen = true;
                 },
                 saveProgram() {
@@ -1297,14 +1297,20 @@
                     } else {
                         this.programs.push({ ...this.editingProgram, id: Date.now() });
                     }
-                    this.saveToStorage();
-                    this.programModalOpen = false;
-                    this.showToast('Program Disimpan', 'Data program diperbarui.');
+                    this.saveToStorage(); this.programModalOpen = false; this.showToast('Tersimpan', 'Program diperbarui.');
                 },
-                deleteProgram(id) {
-                    this.programs = this.programs.filter(p => p.id !== id);
-                    this.saveToStorage();
+                deleteProgram(id) { this.programs = this.programs.filter(p => p.id !== id); this.saveToStorage(); },
+
+                openNoticeModal() {
+                    this.editingNotice = { id: null, title: '', date: new Date().toLocaleDateString('id-ID'), description: 'Informasi Resmi', pdfUrl: '' };
+                    this.noticeModalOpen = true;
                 },
+                saveNotice() {
+                    this.notices.unshift({ ...this.editingNotice, id: Date.now() });
+                    this.saveToStorage(); this.noticeModalOpen = false; this.showToast('Tersimpan', 'Pengumuman PDF diunggah.');
+                },
+                deleteNotice(id) { this.notices = this.notices.filter(n => n.id !== id); this.saveToStorage(); },
+                viewPdf(url, title) { this.currentPdfUrl = url; this.currentPdfTitle = title; this.pdfViewerModalOpen = true; },
 
                 openGalleryModal() {
                     this.editingMedia = { type: 'photo', title: '', url: '', youtubeUrl: '' };
@@ -1312,13 +1318,11 @@
                 },
                 saveMediaItem() {
                     if (this.editingMedia.type === 'photo') {
-                        this.galleryPhotos.unshift({ id: Date.now(), title: this.editingMedia.title, url: this.editingMedia.url });
+                        this.galleryPhotos.unshift({ id: Date.now(), title: this.editingMedia.title, url: this.editingMedia.url, caption: 'Dokumentasi' });
                     } else {
-                        this.galleryVideos.unshift({ id: Date.now(), title: this.editingMedia.title, youtubeUrl: this.editingMedia.youtubeUrl });
+                        this.galleryVideos.unshift({ id: Date.now(), title: this.editingMedia.title, youtubeUrl: this.editingMedia.youtubeUrl, description: 'Video' });
                     }
-                    this.saveToStorage();
-                    this.galleryModalOpen = false;
-                    this.showToast('Media Ditambahkan', 'Galeri berhasil diperbarui.');
+                    this.saveToStorage(); this.galleryModalOpen = false; this.showToast('Tersimpan', 'Media galeri ditambah.');
                 },
                 deleteGalleryItem(type, id) {
                     if (type === 'photo') this.galleryPhotos = this.galleryPhotos.filter(p => p.id !== id);
@@ -1335,25 +1339,15 @@
                 submitPpdbForm() {
                     this.ppdbList.unshift({ id: Date.now(), ...this.ppdbForm, status: 'Pending' });
                     this.saveToStorage();
-                    this.showToast('Pendaftaran Berhasil!', `Terima kasih ${this.ppdbForm.fullName}, data tersimpan.`);
+                    this.showToast('Pendaftaran Berhasil!', `Terima kasih ${this.ppdbForm.fullName}.`);
                     this.ppdbForm = { fullName: '', nisn: '', birthPlace: '', birthDate: '', gender: 'Laki-laki', schoolOrigin: '', parentName: '', phone: '', programChoice: 'Tahfidh Al-Qur\'an', status: 'Pending' };
                 },
-                deletePpdbItem(id) {
-                    this.ppdbList = this.ppdbList.filter(item => item.id !== id);
-                    this.saveToStorage();
-                },
-                clearAllPpdbData() {
-                    if (confirm('Hapus seluruh pendaftar?')) { this.ppdbList = []; this.saveToStorage(); }
-                },
                 exportPpdbCsv() {
-                    let csv = 'Nama,NISN,Asal Sekolah,Program,WA,Status\n';
-                    this.ppdbList.forEach(item => {
-                        csv += `"${item.fullName}","${item.nisn}","${item.schoolOrigin}","${item.programChoice}","${item.phone}","${item.status}"\n`;
-                    });
+                    let csv = 'Nama,NISN,Asal Sekolah,Program,WA\n';
+                    this.ppdbList.forEach(item => { csv += `"${item.fullName}","${item.nisn}","${item.schoolOrigin}","${item.programChoice}","${item.phone}"\n`; });
                     const blob = new Blob([csv], { type: 'text/csv' });
                     const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url; a.download = 'data-ppdb.csv'; a.click();
+                    const a = document.createElement('a'); a.href = url; a.download = 'data-ppdb.csv'; a.click();
                 },
 
                 showToast(title, message) {
