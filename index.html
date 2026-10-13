@@ -98,7 +98,7 @@
                 </span>
             </div>
 
-            <!-- Social Links & E-Karakter (Tombol Login Dihilangkan) -->
+            <!-- Social Links & E-Karakter (Tanpa Tombol Login Publik) -->
             <div class="flex items-center space-x-3">
                 <div class="flex items-center space-x-2 border-r border-emerald-800 pr-3">
                     <a :href="socials.wa" target="_blank" class="hover:text-gold-400 transition" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
@@ -113,7 +113,7 @@
                     <i class="fas fa-id-card-clip text-gold-400"></i> E-Karakter
                 </a>
 
-                <!-- Indikator & Tombol Dashboard CMS (Hanya muncul jika diakses via ?admin=true) -->
+                <!-- Indikator & Tombol Dashboard CMS (Hanya muncul jika diakses via URL rahasia ?admin=true) -->
                 <template x-if="isAdminLoggedIn">
                     <div class="flex items-center gap-2 bg-emerald-900 px-2.5 py-1 rounded-lg border border-gold-500/50">
                         <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
@@ -251,7 +251,7 @@
         </div>
     </section>
 
-    <!-- Profil & Foto Kepala Madrasah (Bisa Edit/Upload Foto Langsung) -->
+    <!-- Profil & Foto Kepala Madrasah (Bisa Edit/Upload Foto Langsung Tanpa Link) -->
     <section id="profil" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
@@ -264,7 +264,7 @@
                 <div class="lg:col-span-5 relative">
                     <div class="relative mx-auto max-w-md lg:max-w-none">
                         <img :src="schoolInfo.kepsekPhoto || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop'" alt="Kepala Madrasah" class="rounded-3xl shadow-xl object-cover w-full h-[420px]">
-                        <!-- Tombol Ganti Foto Kepala khusus saat Admin Mode Aktif -->
+                        <!-- Tombol Ganti Foto Kepala khusus saat Admin Mode Aktif via ?admin=true -->
                         <template x-if="isAdminLoggedIn">
                             <div class="absolute bottom-3 right-3 z-10">
                                 <label class="cursor-pointer bg-slate-900 hover:bg-slate-800 text-white text-xs px-3.5 py-2 rounded-xl shadow-lg flex items-center gap-1.5 transition">
@@ -358,275 +358,4 @@
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Program Unggulan Madrasah</h2>
                 </div>
                 <template x-if="isAdminLoggedIn">
-                    <button @click="openProgramModal()" class="mt-4 md:mt-0 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-md">
-                        <i class="fas fa-plus-circle"></i> Tambah Program
-                    </button>
-                </template>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <template x-for="item in programs" :key="item.id">
-                    <div class="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 relative group flex flex-col justify-between">
-                        <div>
-                            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-700 group-hover:text-white transition">
-                                <i :class="item.icon || 'fas fa-star'"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-3" x-text="item.title"></h3>
-                            <p class="text-slate-600 text-sm leading-relaxed mb-4" x-text="item.description"></p>
-                        </div>
-                        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full" x-text="item.badge || 'Unggulan'"></span>
-                            <template x-if="isAdminLoggedIn">
-                                <div class="flex items-center gap-2">
-                                    <button @click="openProgramModal(item)" class="text-amber-600 hover:text-amber-800 p-1.5 text-xs"><i class="fas fa-edit"></i> Edit</button>
-                                    <button @click="deleteProgram(item.id)" class="text-rose-600 hover:text-rose-800 p-1.5 text-xs"><i class="fas fa-trash"></i> Hapus</button>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ekstrakurikuler -->
-    <section id="ekstrakurikuler" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-                <div>
-                    <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-50 px-4 py-1.5 rounded-full">Pengembangan Bakat</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Ekstrakurikuler & Minat Bakat</h2>
-                </div>
-                <template x-if="isAdminLoggedIn">
-                    <button @click="openEkskulModal()" class="mt-4 md:mt-0 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-md">
-                        <i class="fas fa-plus-circle"></i> Tambah Ekstrakurikuler
-                    </button>
-                </template>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <template x-for="item in ekstrakurikuler" :key="item.id">
-                    <div class="bg-slate-50 border border-slate-200/90 p-6 rounded-2xl hover:border-emerald-500 transition relative flex flex-col justify-between group shadow-sm">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-emerald-800 text-gold-400 flex items-center justify-center text-xl mb-4 shadow-sm group-hover:scale-110 transition">
-                                <i :class="item.icon || 'fas fa-users'"></i>
-                            </div>
-                            <h3 class="font-bold text-lg text-slate-900" x-text="item.name"></h3>
-                            <p class="text-xs text-slate-600 mt-2 leading-relaxed" x-text="item.description"></p>
-                        </div>
-                        <template x-if="isAdminLoggedIn">
-                            <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs">
-                                <span class="text-[10px] text-slate-400 font-mono" x-text="item.icon"></span>
-                                <div class="flex gap-2">
-                                    <button @click="openEkskulModal(item)" class="text-amber-600 hover:text-amber-800 font-medium"><i class="fas fa-edit"></i> Edit</button>
-                                    <button @click="deleteEkskul(item.id)" class="text-rose-600 hover:text-rose-800 font-medium"><i class="fas fa-trash"></i> Hapus</button>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </template>
-            </div>
-        </div>
-    </section>
-
-    <!-- Galeri Foto & Video YouTube -->
-    <section id="galeri" class="py-20 bg-slate-900 text-white" x-data="{ activeTab: 'photos' }">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
-                <div>
-                    <span class="text-gold-400 font-bold text-sm tracking-wider uppercase bg-white/10 px-4 py-1.5 rounded-full border border-gold-400/30">Dokumentasi & Media</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Galeri Foto & Video YouTube</h2>
-                </div>
-                <div class="mt-6 md:mt-0 flex items-center gap-3">
-                    <div class="bg-slate-800 p-1.5 rounded-2xl flex border border-slate-700">
-                        <button @click="activeTab = 'photos'" :class="activeTab === 'photos' ? 'bg-emerald-700 text-white' : 'text-slate-400 hover:text-white'" class="px-5 py-2 rounded-xl text-xs font-semibold transition">
-                            <i class="fas fa-images mr-1.5"></i> Foto
-                        </button>
-                        <button @click="activeTab = 'videos'" :class="activeTab === 'videos' ? 'bg-emerald-700 text-white' : 'text-slate-400 hover:text-white'" class="px-5 py-2 rounded-xl text-xs font-semibold transition">
-                            <i class="fab fa-youtube text-red-500 mr-1.5"></i> Video YouTube
-                        </button>
-                    </div>
-                    <template x-if="isAdminLoggedIn">
-                        <button @click="openGalleryModal()" class="bg-gold-500 hover:bg-gold-600 text-slate-900 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-md">
-                            <i class="fas fa-plus"></i> Tambah Media
-                        </button>
-                    </template>
-                </div>
-            </div>
-
-            <!-- Photos Tab -->
-            <div x-show="activeTab === 'photos'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <template x-for="item in galleryPhotos" :key="item.id">
-                    <div class="bg-slate-800 rounded-3xl overflow-hidden border border-slate-700 group relative">
-                        <div class="h-64 overflow-hidden relative cursor-pointer" @click="openPhotoPreview(item.url, item.title)">
-                            <img :src="item.url" :alt="item.title" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
-                            <div class="absolute bottom-4 left-4 right-4">
-                                <h3 class="font-bold text-white text-base" x-text="item.title"></h3>
-                                <p class="text-xs text-slate-300 mt-1" x-text="item.caption || 'Dokumentasi MA Mambaul Ulum'"></p>
-                            </div>
-                        </div>
-                        <template x-if="isAdminLoggedIn">
-                            <div class="p-3 bg-slate-900 border-t border-slate-800 flex justify-end text-xs">
-                                <button @click="deleteGalleryItem('photo', item.id)" class="text-rose-400 hover:text-rose-300"><i class="fas fa-trash mr-1"></i> Hapus Foto</button>
-                            </div>
-                        </template>
-                    </div>
-                </template>
-            </div>
-
-            <!-- Videos Tab (YouTube) -->
-            <div x-show="activeTab === 'videos'" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <template x-for="item in galleryVideos" :key="item.id">
-                    <div class="bg-slate-800 rounded-3xl overflow-hidden border border-slate-700 p-4">
-                        <div class="relative w-full rounded-2xl overflow-hidden shadow-lg bg-black" style="padding-top: 56.25%;">
-                            <iframe 
-                                class="absolute top-0 left-0 w-full h-full border-0" 
-                                :src="'https://www.youtube.com/embed/' + getYouTubeId(item.youtubeUrl)" 
-                                title="YouTube video player" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <div class="mt-4 flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-white text-lg" x-text="item.title"></h3>
-                                <p class="text-xs text-slate-400 mt-1" x-text="item.description || 'Video kegiatan madrasah'"></p>
-                            </div>
-                            <template x-if="isAdminLoggedIn">
-                                <button @click="deleteGalleryItem('video', item.id)" class="text-rose-400 hover:text-rose-300 text-xs px-2 py-1"><i class="fas fa-trash"></i></button>
-                            </template>
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </div>
-    </section>
-
-    <!-- PPDB Form Online -->
-    <section id="ppdb" class="py-20 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-100 px-4 py-1.5 rounded-full">Penerimaan Siswa Baru</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Formulir PPDB Online T.A. 2025/2026</h2>
-                <p class="text-slate-600 mt-3 text-sm">Isi data di bawah ini secara lengkap. Data akan langsung terdaftar di sistem sekolah.</p>
-            </div>
-
-            <div class="max-w-4xl mx-auto bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-xl">
-                <form @submit.prevent="submitPpdbForm()" class="space-y-6">
-                    <div class="border-b border-slate-100 pb-4">
-                        <h3 class="text-lg font-bold text-emerald-800 flex items-center gap-2">
-                            <i class="fas fa-user-graduate text-gold-500"></i> Identitas Calon Siswa
-                        </h3>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Lengkap Siswa *</label>
-                            <input type="text" x-model="ppdbForm.fullName" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="Sesuai Ijazah / Akta">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">NISN (10 Digit) *</label>
-                            <input type="number" x-model="ppdbForm.nisn" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="0012345678">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Tempat Lahir *</label>
-                            <input type="text" x-model="ppdbForm.birthPlace" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="Malang">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Tanggal Lahir *</label>
-                            <input type="date" x-model="ppdbForm.birthDate" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Jenis Kelamin *</label>
-                            <select x-model="ppdbForm.gender" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm">
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Asal Sekolah / MTs / SMP *</label>
-                            <input type="text" x-model="ppdbForm.schoolOrigin" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="Nama Sekolah Asal">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Orang Tua / Wali *</label>
-                            <input type="text" x-model="ppdbForm.parentName" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="Nama Orang Tua">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">No. WhatsApp Aktif *</label>
-                            <input type="tel" x-model="ppdbForm.phone" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm" placeholder="08123456789">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Pilihan Program *</label>
-                            <select x-model="ppdbForm.programChoice" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-sm">
-                                <option value="Tahfidh Al-Qur'an">Tahfidh Al-Qur'an</option>
-                                <option value="Saintek & Riset">Saintek & Riset (KSM)</option>
-                                <option value="Keagamaan & Kitab Kuning">Keagamaan & Kitab Kuning</option>
-                                <option value="Reguler & IT Skills">Reguler & Digital Skills</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="pt-4">
-                        <button type="submit" class="w-full py-4 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-base rounded-xl shadow-lg transition flex items-center justify-center gap-2">
-                            <i class="fas fa-paper-plane"></i> Submit Pendaftaran PPDB
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Berita -->
-    <section id="berita" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-                <div>
-                    <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-50 px-4 py-1.5 rounded-full">Kabar Madrasah</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Berita & Informasi Terkini</h2>
-                </div>
-                <template x-if="isAdminLoggedIn">
-                    <button @click="openNewsModal()" class="mt-4 md:mt-0 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-md">
-                        <i class="fas fa-plus-circle"></i> Tambah Berita
-                    </button>
-                </template>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <template x-for="item in newsList" :key="item.id">
-                    <article class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <img :src="item.image || 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop'" :alt="item.title" class="w-full h-48 object-cover">
-                            <div class="p-6 space-y-3">
-                                <div class="text-xs font-semibold text-emerald-700" x-text="item.date + ' • ' + (item.category || 'Informasi')"></div>
-                                <h3 class="font-bold text-lg text-slate-900 line-clamp-2" x-text="item.title"></h3>
-                                <p class="text-slate-600 text-xs leading-relaxed line-clamp-3" x-text="item.summary"></p>
-                            </div>
-                        </div>
-                        <template x-if="isAdminLoggedIn">
-                            <div class="px-6 py-3 bg-slate-50 border-t border-slate-100 flex justify-end gap-3 text-xs">
-                                <button @click="openNewsModal(item)" class="text-amber-600 hover:text-amber-800"><i class="fas fa-edit"></i> Edit</button>
-                                <button @click="deleteNews(item.id)" class="text-rose-600 hover:text-rose-800"><i class="fas fa-trash"></i> Hapus</button>
-                            </div>
-                        </template>
-                    </article>
-                </template>
-            </div>
-        </div>
-    </section>
-
-    <!-- Kontak -->
-    <section id="kontak" class="py-20 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                <div class="lg:col-span-5 space-y-6">
-                    <span class="text-gold-400 font-bold text-sm tracking-wider uppercase bg
+                    <button @click="openProgramModal()" class="mt-4 md:mt-0 bg-
