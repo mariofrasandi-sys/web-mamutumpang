@@ -90,28 +90,23 @@
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
             <div class="flex items-center space-x-4">
                 <span class="flex items-center gap-1.5 font-medium">
-                    <i class="fas fa-bullhorn text-gold-400"></i> PPDB T.A. 2025/2026 Telah Dibuka!
+                    <i class="fas fa-bullhorn text-gold-400"></i> PPDB T.A. 2025/2026 Telah Dibuka![cite: 2]
                 </span>
                 <span class="hidden md:inline text-emerald-800">|</span>
                 <span class="hidden md:flex items-center gap-1">
-                    <i class="fas fa-map-marker-alt text-gold-400"></i> Kec. Tumpang, Kab. Malang
+                    <i class="fas fa-map-marker-alt text-gold-400"></i> Kec. Tumpang, Kab. Malang[cite: 2]
                 </span>
             </div>
 
-            <!-- Social Links & E-Karakter (Link URL manual) -->
+            <!-- Social Links & Indikator Admin -->
             <div class="flex items-center space-x-3">
-                <div class="flex items-center space-x-2 border-r border-emerald-800 pr-3">
+                <div class="flex items-center space-x-2 pr-3">
                     <a :href="socials.wa" target="_blank" class="hover:text-gold-400 transition" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     <a :href="socials.ig" target="_blank" class="hover:text-gold-400 transition" title="Instagram"><i class="fab fa-instagram"></i></a>
                     <a :href="socials.fb" target="_blank" class="hover:text-gold-400 transition" title="Facebook"><i class="fab fa-facebook"></i></a>
                     <a :href="socials.yt" target="_blank" class="hover:text-gold-400 transition" title="YouTube"><i class="fab fa-youtube"></i></a>
                     <a :href="socials.tw" target="_blank" class="hover:text-gold-400 transition" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
                 </div>
-
-                <!-- Tombol E-Karakter (Link URL Manual, bisa diatur lewat CMS atau langsung ubah link href-nya) -->
-                <a :href="schoolInfo.ekarakterUrl || 'https://script.google.com/'" target="_blank" class="bg-emerald-800 hover:bg-emerald-700 text-gold-300 border border-emerald-700/80 px-3 py-1 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
-                    <i class="fas fa-id-card-clip text-gold-400"></i> E-Karakter
-                </a>
 
                 <!-- Indikator & Tombol Dashboard CMS (Hanya muncul jika diakses via URL rahasia ?admin=true) -->
                 <template x-if="isAdminLoggedIn">
@@ -146,16 +141,23 @@
                     </div>
                 </a>
 
+                <!-- Navigasi Utama + Menu E-Karakter (Icon & Login) Sejajar -->
                 <nav class="hidden lg:flex items-center space-x-1 font-medium text-slate-700 text-sm">
                     <a href="#beranda" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Beranda</a>
                     <a href="#profil" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Profil</a>
                     <a href="#pengumuman" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Pengumuman</a>
-                    <a href="#program" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Program Unggulan</a>
-                    <a href="#ekstrakurikuler" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Ekstrakurikuler</a>
-                    <a href="#galeri" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Galeri & YouTube</a>
+                    <a href="#program" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Program</a>
+                    <a href="#ekstrakurikuler" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Ekskul</a>
+                    <a href="#galeri" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Galeri</a>
                     <a href="#ppdb" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">PPDB</a>
                     <a href="#berita" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Berita</a>
                     <a href="#kontak" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Kontak</a>
+                    
+                    <!-- Menu E-Karakter (Icon & Login Terintegrasi URL Manual) -->
+                    <a :href="schoolInfo.ekarakterUrl || 'https://script.google.com/'" target="_blank" class="ml-2 px-3.5 py-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold transition flex items-center gap-2 border border-emerald-200">
+                        <i class="fas fa-id-card-clip text-emerald-600"></i>
+                        <span>Login</span>
+                    </a>
                 </nav>
 
                 <div class="hidden sm:flex items-center gap-3">
@@ -181,6 +183,12 @@
             <a @click="mobileMenuOpen = false" href="#ppdb" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">PPDB Online</a>
             <a @click="mobileMenuOpen = false" href="#berita" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Berita & Informasi</a>
             <a @click="mobileMenuOpen = false" href="#kontak" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kontak</a>
+            
+            <!-- Mobile Menu E-Karakter Login -->
+            <a :href="schoolInfo.ekarakterUrl || 'https://script.google.com/'" target="_blank" class="block px-3 py-2 rounded-md text-base font-medium bg-emerald-50 text-emerald-800">
+                <i class="fas fa-id-card-clip mr-2 text-emerald-600"></i> Login E-Karakter
+            </a>
+
             <div class="pt-4">
                 <button @click="mobileMenuOpen = false; openPpdbModal()" class="w-full text-center px-5 py-3 bg-emerald-700 text-white font-semibold rounded-xl shadow-md">
                     <i class="fas fa-user-plus mr-2 text-gold-400"></i> Daftar PPDB Online
@@ -767,7 +775,7 @@
 
                 <!-- Tab School Info & Logo -->
                 <div x-show="cmsTab === 'school'" class="space-y-6 max-w-3xl">
-                    <h4 class="font-bold text-slate-800 text-sm">Pengaturan Logo, Info & Link E-Karakter Sekolah</h4>
+                    <h4 class="font-bold text-slate-800 text-sm">Pengaturan Logo, Info & Link URL Login E-Karakter</h4>
                     <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-2">Logo Sekolah</label>
@@ -795,7 +803,7 @@
                             <input type="text" x-model="schoolInfo.tagline" class="w-full px-3 py-2 rounded-xl border text-xs">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Link URL Tombol E-Karakter (Input Manual)</label>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Link URL Tombol Login E-Karakter (Input Manual)</label>
                             <input type="url" x-model="schoolInfo.ekarakterUrl" class="w-full px-3 py-2 rounded-xl border text-xs" placeholder="https://script.google.com/...">
                         </div>
                         <div>
