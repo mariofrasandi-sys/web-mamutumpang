@@ -119,7 +119,7 @@
     <header class="sticky top-8 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all" x-data="{ mobileMenuOpen: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <a href="#" @click.prevent="currentView = 'home'" class="flex items-center gap-3 group">
+                <a href="#" @click.prevent="goHome()" class="flex items-center gap-3 group">
                     <template x-if="schoolInfo.logoUrl">
                         <img :src="schoolInfo.logoUrl" alt="Logo Sekolah" class="w-12 h-12 rounded-xl object-contain shadow-sm group-hover:scale-105 transition">
                     </template>
@@ -135,16 +135,16 @@
                 </a>
 
                 <nav class="hidden lg:flex items-center space-x-1 font-medium text-slate-700 text-sm">
-                    <a href="#beranda" @click="currentView = 'home'" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Beranda</a>
-                    <a href="#profil" @click="currentView = 'home'" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Profil</a>
-                    <a href="#guru" @click="currentView = 'home'" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Guru</a>
-                    <a href="#pengumuman" @click="currentView = 'home'" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Pengumuman</a>
-                    <a href="#program" @click="currentView = 'home'" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Program</a>
-                    <a href="#ekstrakurikuler" @click="currentView = 'home'" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Ekskul</a>
-                    <a href="#galeri" @click="currentView = 'home'" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Galeri</a>
-                    <a href="#ppdb" @click="currentView = 'home'" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">PPDB</a>
-                    <a href="#berita" @click="currentView = 'home'" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Berita</a>
-                    <a href="#kontak" @click="currentView = 'home'" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Kontak</a>
+                    <a href="#beranda" @click="goHome()" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Beranda</a>
+                    <a href="#profil" @click="goHome()" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Profil</a>
+                    <a href="#guru" @click="goHome()" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Guru</a>
+                    <a href="#pengumuman" @click="goHome()" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Pengumuman</a>
+                    <a href="#program" @click="goHome()" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Program</a>
+                    <a href="#ekstrakurikuler" @click="goHome()" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Ekskul</a>
+                    <a href="#galeri" @click="goHome()" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Galeri</a>
+                    <a href="#ppdb" @click="goHome()" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">PPDB</a>
+                    <a href="#berita" @click="goHome()" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Berita</a>
+                    <a href="#kontak" @click="goHome()" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Kontak</a>
                     
                     <a :href="schoolInfo.ekarakterUrl || '#'" target="_blank" class="ml-2 px-3.5 py-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold transition flex items-center gap-2 border border-emerald-200">
                         <i class="fas fa-id-card-clip text-emerald-600"></i>
@@ -153,7 +153,7 @@
                 </nav>
 
                 <div class="hidden sm:flex items-center gap-3">
-                    <button @click="currentView = 'home'; openPpdbModal()" class="px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold text-sm rounded-xl shadow-lg shadow-emerald-600/20 transition hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <button @click="goHome(); openPpdbModal()" class="px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold text-sm rounded-xl shadow-lg shadow-emerald-600/20 transition hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2">
                         <i class="fas fa-user-plus text-gold-400"></i>
                         <span>Daftar PPDB</span>
                     </button>
@@ -166,7 +166,7 @@
         </div>
     </header>
 
-    <!-- MAIN CONTAINER (Tampilan Beranda atau Halaman Detail Berita) -->
+    <!-- MAIN CONTAINER -->
     <main>
         <!-- VIEW 1: BERANDA UTAMA -->
         <div x-show="currentView === 'home'">
@@ -613,7 +613,7 @@
                 </div>
             </section>
 
-            <!-- Berita & Informasi Terkini (Dapat diklik membuka Halaman Artikel Penuh) -->
+            <!-- Berita & Informasi Terkini (Dapat diklik membuka Artikel dengan URL Shareable) -->
             <section id="berita" class="py-20 bg-slate-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -659,13 +659,18 @@
             </section>
         </div>
 
-        <!-- VIEW 2: HALAMAN BACA ARTIKEL BERITA PENUH (PORTAL BERITA ONLINE STYLE) -->
+        <!-- VIEW 2: HALAMAN BACA ARTIKEL PENUH DENGAN URL SHAREABLE -->
         <div x-show="currentView === 'article'" class="py-12 bg-white min-h-screen" x-cloak>
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
                 <!-- Tombol Kembali ke Beranda -->
-                <div>
-                    <button @click="currentView = 'home'" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-semibold text-xs transition">
+                <div class="flex justify-between items-center">
+                    <button @click="goHome()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-semibold text-xs transition">
                         <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+                    </button>
+                    
+                    <!-- Tombol Salin Link untuk Dibagikan -->
+                    <button @click="copyArticleLink()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition">
+                        <i class="fas fa-share-nodes"></i> Salin Link Berita Ini
                     </button>
                 </div>
 
@@ -691,9 +696,9 @@
                 <!-- Bagikan / Navigasi Bawah -->
                 <div class="pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4">
                     <div class="text-xs text-slate-500 font-medium">
-                        Bagikan informasi ini ke kerabat atau media sosial madrasah.
+                        Bagikan informasi kegiatan madrasah ini ke rekan atau WhatsApp.
                     </div>
-                    <button @click="currentView = 'home'" class="px-6 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-md transition">
+                    <button @click="goHome()" class="px-6 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-md transition">
                         Lihat Berita Lainnya
                     </button>
                 </div>
@@ -1151,7 +1156,7 @@
         function schoolApp() {
             return {
                 isAdminLoggedIn: false,
-                currentView: 'home', // 'home' atau 'article'
+                currentView: 'home',
                 adminModalOpen: false,
                 programModalOpen: false,
                 ekskulModalOpen: false,
@@ -1232,7 +1237,25 @@
                             this.loadDefaultData();
                             this.saveToStorage();
                         }
-                    }, (error) => { this.loadDefaultData(); });
+
+                        // Cek apakah ada parameter URL Hash untuk membuka berita langsung saat di-share
+                        this.checkUrlHashForArticle();
+                    }, (error) => { 
+                        this.loadDefaultData(); 
+                        this.checkUrlHashForArticle();
+                    });
+                },
+
+                checkUrlHashForArticle() {
+                    const hash = window.location.hash;
+                    if (hash.startsWith('#baca/')) {
+                        const articleId = Number(hash.replace('#baca/', ''));
+                        const found = this.newsList.find(n => n.id === articleId);
+                        if (found) {
+                            this.selectedNews = found;
+                            this.currentView = 'article';
+                        }
+                    }
                 },
 
                 updateClock() {
@@ -1345,11 +1368,29 @@
                     this.editingNews = item ? { ...item } : { id: null, title: '', category: 'Informasi', date: new Date().toLocaleDateString('id-ID'), image: '', summary: '' };
                     this.newsModalOpen = true;
                 },
+
                 openNewsDetail(item) {
                     this.selectedNews = item;
                     this.currentView = 'article';
+                    window.location.hash = 'baca/' + item.id;
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 },
+
+                goHome() {
+                    this.currentView = 'home';
+                    window.location.hash = '';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+
+                copyArticleLink() {
+                    const currentUrl = window.location.href;
+                    navigator.clipboard.writeText(currentUrl).then(() => {
+                        this.showToast('Link Disalin!', 'Tautan berita berhasil disalin ke clipboard. Silakan dibagikan.');
+                    }).catch(err => {
+                        this.showToast('Gagal', 'Tidak dapat menyalin tautan.');
+                    });
+                },
+
                 saveNews() {
                     if (this.editingNews.id) {
                         const idx = this.newsList.findIndex(n => n.id === this.editingNews.id);
