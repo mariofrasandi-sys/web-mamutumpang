@@ -85,7 +85,7 @@
 
 <body class="font-sans bg-slate-50 text-slate-800 antialiased selection:bg-emerald-600 selection:text-white" x-data="schoolApp()">
 
-    <!-- Top Bar: Jam & Tanggal Aktif -->
+    <!-- Top Bar: Jam & Tanggal Aktif Realtime -->
     <div class="bg-emerald-950 text-emerald-100 text-xs py-2 px-4 border-b border-emerald-800/60 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
             <div class="flex items-center space-x-2 font-medium">
@@ -103,7 +103,7 @@
                     <a :href="socials.tw" target="_blank" class="hover:text-gold-400 transition" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
                 </div>
 
-                <!-- Indikator & Tombol Dashboard CMS (Hanya muncul jika diakses via URL rahasia ?admin=true) -->
+                <!-- Indikator & Tombol Dashboard CMS (Hanya muncul jika diakses via URL ?admin=true) -->
                 <template x-if="isAdminLoggedIn">
                     <div class="flex items-center gap-2 bg-emerald-900 px-2.5 py-1 rounded-lg border border-gold-500/50">
                         <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
@@ -749,14 +749,17 @@
                     </div>
                     <div>
                         <h3 class="font-bold text-base">CMS Dashboard - MA Mambaul Ulum Tumpang</h3>
-                        <p class="text-[11px] text-slate-400">Pengelolaan Konten, Logo, Hero Teks, Guru, PPDB & Ekstrakurikuler</p>
+                        <p class="text-[11px] text-slate-400">Pengelolaan Berita, Logo, Hero Teks, Guru, PPDB & Ekstrakurikuler</p>
                     </div>
                 </div>
                 <button @click="adminModalOpen = false" class="text-slate-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
             </div>
 
-            <div class="flex-1 overflow-y-auto p-6 bg-slate-50 custom-scrollbar" x-data="{ cmsTab: 'hero' }">
+            <div class="flex-1 overflow-y-auto p-6 bg-slate-50 custom-scrollbar" x-data="{ cmsTab: 'news' }">
                 <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-4 mb-6">
+                    <button @click="cmsTab = 'news'" :class="cmsTab === 'news' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
+                        <i class="fas fa-newspaper"></i> Kelola Berita (<span x-text="newsList.length"></span>)
+                    </button>
                     <button @click="cmsTab = 'hero'" :class="cmsTab === 'hero' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-200'" class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2">
                         <i class="fas fa-heading"></i> Teks Utama (Hero)
                     </button>
@@ -783,9 +786,35 @@
                     </button>
                 </div>
 
+                <!-- Tab Kelola Berita -->
+                <div x-show="cmsTab === 'news'" class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-slate-800 text-sm">Daftar Berita & Informasi Madrasah</h4>
+                        <button @click="openNewsModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-plus mr-1"></i> Tambah Berita Baru</button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <template x-for="n in newsList" :key="n.id">
+                            <div class="bg-white p-4 rounded-xl border flex gap-4 items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img :src="n.image" class="w-16 h-16 rounded-lg object-cover">
+                                    <div>
+                                        <span class="text-[10px] font-semibold text-emerald-700" x-text="n.date"></span>
+                                        <h5 class="font-bold text-slate-900 text-xs line-clamp-1" x-text="n.title"></h5>
+                                        <p class="text-[11px] text-slate-500 line-clamp-1" x-text="n.summary"></p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2 shrink-0">
+                                    <button @click="openNewsModal(n)" class="text-amber-600 text-xs"><i class="fas fa-edit"></i></button>
+                                    <button @click="deleteNews(n.id)" class="text-rose-600 text-xs"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
                 <!-- Tab Hero Teks Utama -->
                 <div x-show="cmsTab === 'hero'" class="space-y-4 max-w-2xl">
-                    <h4 class="font-bold text-slate-800 text-sm">Edit Kata-kata di Tampilan Utama (Hero Section)</h4>
+                    <h4 class="font-bold text-slate-800 text-sm">Edit Teks Utama (Hero Section)</h4>
                     <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4 text-xs">
                         <div>
                             <label class="block font-semibold mb-1 text-slate-700">Teks Badge (Paling Atas)</label>
@@ -796,14 +825,14 @@
                             <textarea rows="2" x-model="heroContent.mainTitle" class="w-full px-3 py-2 rounded-xl border"></textarea>
                         </div>
                         <div>
-                            <label class="block font-semibold mb-1 text-slate-700">Paragraf Sambutan/Deskripsi</label>
+                            <label class="block font-semibold mb-1 text-slate-700">Paragraf Deskripsi</label>
                             <textarea rows="3" x-model="heroContent.description" class="w-full px-3 py-2 rounded-xl border"></textarea>
                         </div>
                         <button @click="saveToStorage(); showToast('Berhasil', 'Teks utama diperbarui.');" class="px-5 py-2.5 bg-emerald-700 text-white rounded-xl font-bold shadow-md">Simpan Teks Utama</button>
                     </div>
                 </div>
 
-                <!-- Tab School Info, Kepala Sekolah & E-Karakter URL -->
+                <!-- Tab School Info & E-Karakter -->
                 <div x-show="cmsTab === 'school'" class="space-y-6 max-w-3xl">
                     <h4 class="font-bold text-slate-800 text-sm">Pengaturan Kepala Madrasah, Logo & Link E-Karakter</h4>
                     <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 text-xs">
@@ -927,6 +956,39 @@
                     <button @click="openGalleryModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-plus"></i> Tambah Foto Galeri</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal Add/Edit Berita -->
+    <div x-show="newsModalOpen" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative" @click.away="newsModalOpen = false">
+            <h3 class="font-bold text-slate-900 text-lg mb-4" x-text="editingNews.id ? 'Edit Berita' : 'Tambah Berita Baru'"></h3>
+            <form @submit.prevent="saveNews()" class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-semibold mb-1">Judul Berita *</label>
+                    <input type="text" x-model="editingNews.title" required class="w-full px-3 py-2 border rounded-xl">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Kategori</label>
+                    <input type="text" x-model="editingNews.category" class="w-full px-3 py-2 border rounded-xl" placeholder="e.g. Kegiatan / Prestasi">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Tanggal</label>
+                    <input type="text" x-model="editingNews.date" class="w-full px-3 py-2 border rounded-xl" placeholder="e.g. 28 Okt 2026">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Upload Gambar Berita *</label>
+                    <input type="file" accept="image/*" @change="handleNewsImageUpload($event)" class="w-full text-xs">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Ringkasan / Isi Berita</label>
+                    <textarea rows="3" x-model="editingNews.summary" required class="w-full px-3 py-2 border rounded-xl"></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" @click="newsModalOpen = false" class="px-4 py-2 rounded-xl text-slate-600">Batal</button>
+                    <button type="submit" class="px-5 py-2 bg-emerald-700 text-white font-bold rounded-xl">Simpan Berita</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -1086,6 +1148,7 @@
                 programModalOpen: false,
                 ekskulModalOpen: false,
                 teacherModalOpen: false,
+                newsModalOpen: false,
                 galleryModalOpen: false,
                 noticeModalOpen: false,
                 pdfViewerModalOpen: false,
@@ -1114,10 +1177,10 @@
                 programs: [],
                 ekstrakurikuler: [],
                 teachersList: [],
+                newsList: [],
                 galleryPhotos: [],
                 galleryVideos: [],
                 ppdbList: [],
-                newsList: [],
                 notices: [],
 
                 currentPdfUrl: '',
@@ -1127,6 +1190,7 @@
                 editingProgram: { id: null, title: '', icon: 'fas fa-star', image: '', description: '', badge: 'Unggulan' },
                 editingEkskul: { id: null, name: '', icon: 'fas fa-futbol', image: '', description: '' },
                 editingTeacher: { id: null, name: '', position: '', photo: '' },
+                editingNews: { id: null, title: '', category: 'Informasi', date: new Date().toLocaleDateString('id-ID'), image: '', summary: '' },
                 editingMedia: { type: 'photo', title: '', url: '', youtubeUrl: '' },
                 editingNotice: { id: null, title: '', date: '', description: '', pdfUrl: '' },
 
@@ -1138,7 +1202,6 @@
                         this.isAdminLoggedIn = true;
                     }
 
-                    // Inisialisasi Jam & Tanggal Aktif Realtime
                     this.updateClock();
                     setInterval(() => { this.updateClock(); }, 1000);
 
@@ -1151,11 +1214,11 @@
                             if (data.programs) this.programs = data.programs;
                             if (data.ekstrakurikuler) this.ekstrakurikuler = data.ekstrakurikuler;
                             if (data.teachersList) this.teachersList = data.teachersList;
+                            if (data.newsList) this.newsList = data.newsList;
                             if (data.galleryPhotos) this.galleryPhotos = data.galleryPhotos;
                             if (data.galleryVideos) this.galleryVideos = data.galleryVideos;
                             if (data.notices) this.notices = data.notices;
                             if (data.ppdbList) this.ppdbList = data.ppdbList;
-                            if (data.newsList) this.newsList = data.newsList;
                         } else {
                             this.loadDefaultData();
                             this.saveToStorage();
@@ -1179,6 +1242,9 @@
                     this.teachersList = [
                         { id: 1, name: 'Ust. Muhammad Ali, S.Pd', position: 'Wali Kelas & Guru Al-Qur\'an', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' }
                     ];
+                    this.newsList = [
+                        { id: 1, title: 'Kegiatan Pesantren Ramadhan dan Khatmil Qur\'an', category: 'Kegiatan', date: '28 Mar 2026', image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop', summary: 'Siswa-siswi MA Mambaul Ulum antusias mengikuti rangkaian kegiatan pesantren kilat dan tadarus.' }
+                    ];
                     this.galleryPhotos = [
                         { id: 1, title: 'Gedung Madrasah', url: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop', caption: 'Suasana belajar.' }
                     ];
@@ -1192,11 +1258,11 @@
                         programs: this.programs,
                         ekstrakurikuler: this.ekstrakurikuler,
                         teachersList: this.teachersList,
+                        newsList: this.newsList,
                         galleryPhotos: this.galleryPhotos,
                         galleryVideos: this.galleryVideos,
                         notices: this.notices,
-                        ppdbList: this.ppdbList,
-                        newsList: this.newsList
+                        ppdbList: this.ppdbList
                     };
                     db.ref('ma_cms_data').set(payload);
                 },
@@ -1222,6 +1288,14 @@
                     if (file) {
                         const reader = new FileReader();
                         reader.onload = (event) => { this.editingTeacher.photo = event.target.result; };
+                        reader.readAsDataURL(file);
+                    }
+                },
+                handleNewsImageUpload(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => { this.editingNews.image = event.target.result; };
                         reader.readAsDataURL(file);
                     }
                 },
@@ -1256,6 +1330,23 @@
                         reader.onload = (event) => { this.editingNotice.pdfUrl = event.target.result; };
                         reader.readAsDataURL(file);
                     }
+                },
+
+                openNewsModal(item = null) {
+                    this.editingNews = item ? { ...item } : { id: null, title: '', category: 'Informasi', date: new Date().toLocaleDateString('id-ID'), image: '', summary: '' };
+                    this.newsModalOpen = true;
+                },
+                saveNews() {
+                    if (this.editingNews.id) {
+                        const idx = this.newsList.findIndex(n => n.id === this.editingNews.id);
+                        if (idx !== -1) this.newsList[idx] = { ...this.editingNews };
+                    } else {
+                        this.newsList.unshift({ ...this.editingNews, id: Date.now() });
+                    }
+                    this.saveToStorage(); this.newsModalOpen = false; this.showToast('Tersimpan', 'Berita berhasil diperbarui.');
+                },
+                deleteNews(id) {
+                    this.newsList = this.newsList.filter(n => n.id !== id); this.saveToStorage();
                 },
 
                 openTeacherModal(item = null) {
