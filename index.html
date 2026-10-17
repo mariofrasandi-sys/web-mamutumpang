@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MA Mambaul Ulum Tumpang - Official Website & Portal Admin CMS</title>
+    <title id="page-title">MA Mambaul Ulum Tumpang - Official Website & Portal Admin CMS</title>
+
+    <!-- Meta Tags Open Graph untuk Preview WhatsApp & Media Sosial -->
+    <meta property="og:type" content="article">
+    <meta id="og-title" property="og:title" content="MA Mambaul Ulum Tumpang Malang">
+    <meta id="og-description" property="og:description" content="Portal Resmi Informasi & Kabar Terbaru MA Mambaul Ulum Tumpang">
+    <meta id="og-image" property="og:image" content="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop">
+    <meta id="og-url" property="og:url" content="https://mamutumpang.my.id">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -613,7 +620,7 @@
                 </div>
             </section>
 
-            <!-- Berita & Informasi Terkini (Dapat diklik membuka Artikel dengan URL Shareable) -->
+            <!-- Berita & Informasi Terkini -->
             <section id="berita" class="py-20 bg-slate-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -659,19 +666,25 @@
             </section>
         </div>
 
-        <!-- VIEW 2: HALAMAN BACA ARTIKEL PENUH DENGAN URL SHAREABLE -->
+        <!-- VIEW 2: HALAMAN BACA ARTIKEL PENUH -->
         <div x-show="currentView === 'article'" class="py-12 bg-white min-h-screen" x-cloak>
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-                <!-- Tombol Kembali ke Beranda -->
-                <div class="flex justify-between items-center">
+                <!-- Navigation -->
+                <div class="flex flex-wrap justify-between items-center gap-3">
                     <button @click="goHome()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-semibold text-xs transition">
                         <i class="fas fa-arrow-left"></i> Kembali ke Beranda
                     </button>
                     
-                    <!-- Tombol Salin Link untuk Dibagikan -->
-                    <button @click="copyArticleLink()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition">
-                        <i class="fas fa-share-nodes"></i> Salin Link Berita Ini
-                    </button>
+                    <div class="flex items-center gap-2">
+                        <!-- Tombol Langsung Kirim ke WhatsApp -->
+                        <button @click="shareToWhatsApp()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition">
+                            <i class="fab fa-whatsapp text-lg"></i> Bagikan via WA
+                        </button>
+                        <!-- Tombol Copy Link -->
+                        <button @click="copyArticleLink()" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs transition">
+                            <i class="fas fa-link"></i> Salin Link
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Header Artikel -->
@@ -696,10 +709,10 @@
                 <!-- Bagikan / Navigasi Bawah -->
                 <div class="pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4">
                     <div class="text-xs text-slate-500 font-medium">
-                        Bagikan informasi kegiatan madrasah ini ke rekan atau WhatsApp.
+                        Bagikan berita kegiatan ini langsung ke grup WhatsApp madrasah.
                     </div>
-                    <button @click="goHome()" class="px-6 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-md transition">
-                        Lihat Berita Lainnya
+                    <button @click="shareToWhatsApp()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-lg"></i> Share Ke WhatsApp
                     </button>
                 </div>
             </div>
@@ -1238,7 +1251,6 @@
                             this.saveToStorage();
                         }
 
-                        // Cek apakah ada parameter URL Hash untuk membuka berita langsung saat di-share
                         this.checkUrlHashForArticle();
                     }, (error) => { 
                         this.loadDefaultData(); 
@@ -1252,8 +1264,7 @@
                         const articleId = Number(hash.replace('#baca/', ''));
                         const found = this.newsList.find(n => n.id === articleId);
                         if (found) {
-                            this.selectedNews = found;
-                            this.currentView = 'article';
+                            this.openNewsDetail(found, false);
                         }
                     }
                 },
@@ -1275,7 +1286,7 @@
                         { id: 1, name: 'Ust. Muhammad Ali, S.Pd', position: 'Wali Kelas & Guru Al-Qur\'an', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' }
                     ];
                     this.newsList = [
-                        { id: 1, title: 'MSC 2026 Sukses Digelar di MA Mambaul Ulum Tumpang', category: 'Kegiatan', date: '17/10/2026', image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop', summary: 'TUMPANG - Dalam rangka menyambut Hari Santri Nasional Tahun 2026, Satuan Komunitas Pramuka Ma’arif Nahdlatul Ulama (SAKOMA) MWC NU Tumpang menyelenggarakan Ma’arif Scout Competition (MSC) 2026 pada Sabtu, 17 Oktober 2026. Kegiatan yang bertempat di MA Mambaul Ulum Tumpang ini diikuti oleh 18 lembaga pendidikan di bawah naungan LP Ma’arif NU, yang terdiri atas 14 lembaga MI/SD dan 4 lembaga MTs/SMP. MSC 2026 menjadi momentum penting untuk mengembangkan potensi peserta didik melalui kegiatan kepramukaan yang edukatif, kompetitif, dan berorientasi pada pembentukan karakter. Selain menjadi ajang unjuk kemampuan, kegiatan ini juga menjadi sarana mempererat tali silaturahmi antarlembaga pendidikan serta menanamkan nilai kedisiplinan, kemandirian, dan kepemimpinan sejak dini.' }
+                        { id: 1792241950023, title: 'MSC 2026 Sukses Digelar di MA Mambaul Ulum Tumpang, Perkuat Karakter dan Jiwa Kepramukaan Pelajar Ma\'arif NU', category: 'BERITA', date: '17/10/2026', image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop', summary: 'TUMPANG – Dalam rangka menyambut Hari Santri Nasional Tahun 2026, Satuan Komunitas Pramuka Ma’arif Nahdlatul Ulama (SAKOMA) MWC NU Tumpang menyelenggarakan Ma’arif Scout Competition (MSC) 2026 pada Sabtu, 17 Oktober 2026. Kegiatan yang bertempat di MA Mambaul Ulum Tumpang ini diikuti oleh 18 lembaga pendidikan di bawah naungan LP Ma’arif NU, yang terdiri atas 14 lembaga MI/SD dan 4 lembaga MTs/SMP. MSC 2026 menjadi momentum penting untuk mengembangkan potensi peserta didik melalui kegiatan kepramukaan yang edukatif, kompetitif, dan berorientasi pada pembentukan karakter.' }
                     ];
                     this.galleryPhotos = [
                         { id: 1, title: 'Gedung Madrasah', url: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop', caption: 'Suasana belajar.' }
@@ -1297,6 +1308,61 @@
                         ppdbList: this.ppdbList
                     };
                     db.ref('ma_cms_data').set(payload);
+                },
+
+                openNewsDetail(item, setHash = true) {
+                    this.selectedNews = item;
+                    this.currentView = 'article';
+                    if (setHash) {
+                        window.location.hash = 'baca/' + item.id;
+                    }
+
+                    // Update Meta Dynamic Tags
+                    document.getElementById('page-title').innerText = item.title + " - MA Mambaul Ulum Tumpang";
+                    document.getElementById('og-title').setAttribute('content', item.title);
+                    document.getElementById('og-description').setAttribute('content', item.summary.substring(0, 160) + "...");
+                    if (item.image) {
+                        document.getElementById('og-image').setAttribute('content', item.image);
+                    }
+                    document.getElementById('og-url').setAttribute('content', window.location.href);
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+
+                goHome() {
+                    this.currentView = 'home';
+                    window.location.hash = '';
+                    document.getElementById('page-title').innerText = "MA Mambaul Ulum Tumpang - Official Website & Portal Admin CMS";
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+
+                shareToWhatsApp() {
+                    const link = window.location.href;
+                    const text = `*${this.selectedNews.title}*\n\nRead full story on MA Mambaul Ulum Tumpang:\n${link}`;
+                    const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+                    window.open(waUrl, '_blank');
+                },
+
+                copyArticleLink() {
+                    const currentUrl = window.location.href;
+                    navigator.clipboard.writeText(currentUrl).then(() => {
+                        this.showToast('Link Disalin!', 'Tautan berita disalin ke clipboard.');
+                    }).catch(err => {
+                        this.showToast('Gagal', 'Tidak dapat menyalin tautan.');
+                    });
+                },
+
+                saveNews() {
+                    if (this.editingNews.id) {
+                        const idx = this.newsList.findIndex(n => n.id === this.editingNews.id);
+                        if (idx !== -1) this.newsList[idx] = { ...this.editingNews };
+                    } else {
+                        this.newsList.unshift({ ...this.editingNews, id: Date.now() });
+                    }
+                    this.saveToStorage(); this.newsModalOpen = false; this.showToast('Tersimpan', 'Berita berhasil diperbarui.');
+                },
+                deleteNews(id) {
+                    this.newsList = this.newsList.filter(n => n.id !== id); this.saveToStorage();
                 },
 
                 handleLogoUpload(e) {
@@ -1364,46 +1430,6 @@
                     }
                 },
 
-                openNewsModal(item = null) {
-                    this.editingNews = item ? { ...item } : { id: null, title: '', category: 'Informasi', date: new Date().toLocaleDateString('id-ID'), image: '', summary: '' };
-                    this.newsModalOpen = true;
-                },
-
-                openNewsDetail(item) {
-                    this.selectedNews = item;
-                    this.currentView = 'article';
-                    window.location.hash = 'baca/' + item.id;
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                },
-
-                goHome() {
-                    this.currentView = 'home';
-                    window.location.hash = '';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                },
-
-                copyArticleLink() {
-                    const currentUrl = window.location.href;
-                    navigator.clipboard.writeText(currentUrl).then(() => {
-                        this.showToast('Link Disalin!', 'Tautan berita berhasil disalin ke clipboard. Silakan dibagikan.');
-                    }).catch(err => {
-                        this.showToast('Gagal', 'Tidak dapat menyalin tautan.');
-                    });
-                },
-
-                saveNews() {
-                    if (this.editingNews.id) {
-                        const idx = this.newsList.findIndex(n => n.id === this.editingNews.id);
-                        if (idx !== -1) this.newsList[idx] = { ...this.editingNews };
-                    } else {
-                        this.newsList.unshift({ ...this.editingNews, id: Date.now() });
-                    }
-                    this.saveToStorage(); this.newsModalOpen = false; this.showToast('Tersimpan', 'Berita berhasil diperbarui.');
-                },
-                deleteNews(id) {
-                    this.newsList = this.newsList.filter(n => n.id !== id); this.saveToStorage();
-                },
-
                 openTeacherModal(item = null) {
                     this.editingTeacher = item ? { ...item } : { id: null, name: '', position: '', photo: '' };
                     this.teacherModalOpen = true;
@@ -1437,7 +1463,7 @@
                 deleteEkskul(id) { this.ekstrakurikuler = this.ekstrakurikuler.filter(e => e.id !== id); this.saveToStorage(); },
 
                 openProgramModal(item = null) {
-                    this.editingProgram = item ? { ...item } : { id: null, title: '', icon: 'fas fa-star', image: '', description: '', badge: 'Unggulan' };
+                    this.editingProgram = item ? { ...item } : { id: null, title: '', icon: 'fas fa-star', image: '', description: '', badge: 'Unggulan' },
                     this.programModalOpen = true;
                 },
                 saveProgram() {
