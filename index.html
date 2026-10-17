@@ -93,7 +93,6 @@
                 <span x-text="currentDateTime"></span>
             </div>
 
-            <!-- Social Links & Indikator Admin -->
             <div class="flex items-center space-x-3">
                 <div class="flex items-center space-x-2 pr-3">
                     <a :href="socials.wa" target="_blank" class="hover:text-gold-400 transition" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
@@ -103,7 +102,6 @@
                     <a :href="socials.tw" target="_blank" class="hover:text-gold-400 transition" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
                 </div>
 
-                <!-- Indikator & Tombol Dashboard CMS (Hanya muncul jika diakses via URL ?admin=true) -->
                 <template x-if="isAdminLoggedIn">
                     <div class="flex items-center gap-2 bg-emerald-900 px-2.5 py-1 rounded-lg border border-gold-500/50">
                         <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
@@ -136,7 +134,6 @@
                     </div>
                 </a>
 
-                <!-- Navigasi Utama + Menu E-Karakter Sejajar -->
                 <nav class="hidden lg:flex items-center space-x-1 font-medium text-slate-700 text-sm">
                     <a href="#beranda" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Beranda</a>
                     <a href="#profil" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Profil</a>
@@ -149,7 +146,6 @@
                     <a href="#berita" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Berita</a>
                     <a href="#kontak" class="px-3 py-2 rounded-lg hover:text-emerald-700 hover:bg-emerald-50 transition">Kontak</a>
                     
-                    <!-- Menu E-Karakter Sejajar dengan Navigasi Utama -->
                     <a :href="schoolInfo.ekarakterUrl || '#'" target="_blank" class="ml-2 px-3.5 py-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold transition flex items-center gap-2 border border-emerald-200">
                         <i class="fas fa-id-card-clip text-emerald-600"></i>
                         <span>E Karakter</span>
@@ -636,7 +632,7 @@
         </div>
     </section>
 
-    <!-- Berita -->
+    <!-- Berita & Informasi Terkini (Dapat Diklik untuk Membaca) -->
     <section id="berita" class="py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -653,17 +649,24 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <template x-for="item in newsList" :key="item.id">
-                    <article class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <article @click="openNewsDetail(item)" class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between group">
                         <div>
-                            <img :src="item.image || 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop'" :alt="item.title" class="w-full h-48 object-cover">
+                            <div class="h-48 overflow-hidden relative">
+                                <img :src="item.image || 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop'" :alt="item.title" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                <div class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-sm text-gold-400 text-[10px] font-bold px-2.5 py-1 rounded-lg" x-text="item.category || 'Informasi'"></div>
+                            </div>
                             <div class="p-6 space-y-3">
-                                <div class="text-xs font-semibold text-emerald-700" x-text="item.date + ' • ' + (item.category || 'Informasi')"></div>
-                                <h3 class="font-bold text-lg text-slate-900 line-clamp-2" x-text="item.title"></h3>
+                                <div class="text-xs font-semibold text-slate-400" x-text="item.date"></div>
+                                <h3 class="font-bold text-lg text-slate-900 group-hover:text-emerald-700 transition line-clamp-2" x-text="item.title"></h3>
                                 <p class="text-slate-600 text-xs leading-relaxed line-clamp-3" x-text="item.summary"></p>
                             </div>
                         </div>
+                        <div class="px-6 pb-6 pt-2 flex items-center justify-between text-xs font-bold text-emerald-700">
+                            <span>Baca Selengkapnya</span>
+                            <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        </div>
                         <template x-if="isAdminLoggedIn">
-                            <div class="px-6 py-3 bg-slate-50 border-t border-slate-100 flex justify-end gap-3 text-xs">
+                            <div class="px-6 py-3 bg-slate-50 border-t border-slate-100 flex justify-end gap-3 text-xs" @click.stop="">
                                 <button @click="openNewsModal(item)" class="text-amber-600 hover:text-amber-800"><i class="fas fa-edit"></i> Edit</button>
                                 <button @click="deleteNews(item.id)" class="text-rose-600 hover:text-rose-800"><i class="fas fa-trash"></i> Hapus</button>
                             </div>
@@ -673,6 +676,31 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal Pembaca Berita Lengkap -->
+    <div x-show="newsDetailModalOpen" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col" @click.away="newsDetailModalOpen = false">
+            <div class="relative h-64 sm:h-72 bg-slate-900">
+                <img :src="selectedNews.image" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                <button @click="newsDetailModalOpen = false" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-900/80 text-white flex items-center justify-center hover:bg-slate-900"><i class="fas fa-times text-lg"></i></button>
+                <div class="absolute bottom-4 left-6 right-6">
+                    <span class="bg-emerald-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider" x-text="selectedNews.category"></span>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mt-2 leading-snug" x-text="selectedNews.title"></h2>
+                </div>
+            </div>
+            <div class="p-6 sm:p-8 space-y-4 text-slate-700 text-sm leading-relaxed flex-1">
+                <div class="flex items-center gap-2 text-xs text-slate-400 pb-3 border-b border-slate-100">
+                    <i class="far fa-calendar-alt text-emerald-600"></i>
+                    <span x-text="selectedNews.date"></span>
+                </div>
+                <p class="whitespace-pre-line text-slate-600 text-base" x-text="selectedNews.summary"></p>
+            </div>
+            <div class="p-6 bg-slate-50 border-t border-slate-100 flex justify-end">
+                <button @click="newsDetailModalOpen = false" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl shadow-md">Tutup</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Kontak -->
     <section id="kontak" class="py-20 bg-slate-900 text-white">
@@ -701,17 +729,6 @@
                             <div>
                                 <h4 class="font-bold text-white">WhatsApp Direct</h4>
                                 <p class="text-slate-300 text-xs mt-0.5" x-text="schoolInfo.phone"></p>
-                            </div>
-                        </div>
-
-                        <div class="pt-4">
-                            <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Media Sosial Resmi</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <a :href="socials.wa" target="_blank" class="px-3 py-2 bg-emerald-800 hover:bg-emerald-700 text-white rounded-xl text-xs flex items-center gap-2 transition"><i class="fab fa-whatsapp text-emerald-400"></i> WhatsApp</a>
-                                <a :href="socials.ig" target="_blank" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs flex items-center gap-2 transition"><i class="fab fa-instagram text-pink-400"></i> Instagram</a>
-                                <a :href="socials.fb" target="_blank" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs flex items-center gap-2 transition"><i class="fab fa-facebook text-blue-400"></i> Facebook</a>
-                                <a :href="socials.yt" target="_blank" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs flex items-center gap-2 transition"><i class="fab fa-youtube text-red-500"></i> YouTube</a>
-                                <a :href="socials.tw" target="_blank" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs flex items-center gap-2 transition"><i class="fab fa-x-twitter text-slate-300"></i> Twitter/X</a>
                             </div>
                         </div>
                     </div>
@@ -786,7 +803,6 @@
                     </button>
                 </div>
 
-                <!-- Tab Kelola Berita -->
                 <div x-show="cmsTab === 'news'" class="space-y-4">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-slate-800 text-sm">Daftar Berita & Informasi Madrasah</h4>
@@ -812,7 +828,6 @@
                     </div>
                 </div>
 
-                <!-- Tab Hero Teks Utama -->
                 <div x-show="cmsTab === 'hero'" class="space-y-4 max-w-2xl">
                     <h4 class="font-bold text-slate-800 text-sm">Edit Teks Utama (Hero Section)</h4>
                     <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4 text-xs">
@@ -832,7 +847,6 @@
                     </div>
                 </div>
 
-                <!-- Tab School Info & E-Karakter -->
                 <div x-show="cmsTab === 'school'" class="space-y-6 max-w-3xl">
                     <h4 class="font-bold text-slate-800 text-sm">Pengaturan Kepala Madrasah, Logo & Link E-Karakter</h4>
                     <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 text-xs">
@@ -872,7 +886,6 @@
                     </div>
                 </div>
 
-                <!-- Tab Dewan Guru -->
                 <div x-show="cmsTab === 'teachers'" class="space-y-4">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-slate-800 text-sm">Kelola Data Dewan Guru & Staf</h4>
@@ -897,7 +910,6 @@
                     </div>
                 </div>
 
-                <!-- Tab Ekstrakurikuler -->
                 <div x-show="cmsTab === 'ekskul'" class="space-y-4">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-slate-800 text-sm">Kelola Ekstrakurikuler</h4>
@@ -919,7 +931,6 @@
                     </div>
                 </div>
 
-                <!-- Tab Program -->
                 <div x-show="cmsTab === 'programs'" class="space-y-4">
                     <button @click="openProgramModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-plus"></i> Tambah Program</button>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -938,12 +949,10 @@
                     </div>
                 </div>
 
-                <!-- Tab Notices -->
                 <div x-show="cmsTab === 'notices'" class="space-y-4">
                     <button @click="openNoticeModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-file-upload"></i> Upload PDF Pengumuman</button>
                 </div>
 
-                <!-- Tab PPDB List -->
                 <div x-show="cmsTab === 'ppdb'" class="space-y-4">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-slate-800 text-sm">Daftar Pendaftar PPDB</h4>
@@ -951,7 +960,6 @@
                     </div>
                 </div>
 
-                <!-- Tab Media Gallery -->
                 <div x-show="cmsTab === 'media'" class="space-y-4">
                     <button @click="openGalleryModal()" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"><i class="fas fa-plus"></i> Tambah Foto Galeri</button>
                 </div>
@@ -981,8 +989,8 @@
                     <input type="file" accept="image/*" @change="handleNewsImageUpload($event)" class="w-full text-xs">
                 </div>
                 <div>
-                    <label class="block font-semibold mb-1">Ringkasan / Isi Berita</label>
-                    <textarea rows="3" x-model="editingNews.summary" required class="w-full px-3 py-2 border rounded-xl"></textarea>
+                    <label class="block font-semibold mb-1">Ringkasan / Isi Berita Lengkap</label>
+                    <textarea rows="4" x-model="editingNews.summary" required class="w-full px-3 py-2 border rounded-xl"></textarea>
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" @click="newsModalOpen = false" class="px-4 py-2 rounded-xl text-slate-600">Batal</button>
@@ -1149,6 +1157,7 @@
                 ekskulModalOpen: false,
                 teacherModalOpen: false,
                 newsModalOpen: false,
+                newsDetailModalOpen: false,
                 galleryModalOpen: false,
                 noticeModalOpen: false,
                 pdfViewerModalOpen: false,
@@ -1183,6 +1192,7 @@
                 ppdbList: [],
                 notices: [],
 
+                selectedNews: { title: '', category: '', date: '', image: '', summary: '' },
                 currentPdfUrl: '',
                 currentPdfTitle: '',
 
@@ -1243,7 +1253,7 @@
                         { id: 1, name: 'Ust. Muhammad Ali, S.Pd', position: 'Wali Kelas & Guru Al-Qur\'an', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' }
                     ];
                     this.newsList = [
-                        { id: 1, title: 'Kegiatan Pesantren Ramadhan dan Khatmil Qur\'an', category: 'Kegiatan', date: '28 Mar 2026', image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop', summary: 'Siswa-siswi MA Mambaul Ulum antusias mengikuti rangkaian kegiatan pesantren kilat dan tadarus.' }
+                        { id: 1, title: 'Kegiatan Pesantren Ramadhan dan Khatmil Qur\'an', category: 'Kegiatan', date: '28 Mar 2026', image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop', summary: 'Siswa-siswi MA Mambaul Ulum antusias mengikuti rangkaian kegiatan pesantren kilat, tadarus Al-Qur\'an, serta pengajian kitab kuning yang dibimbing langsung oleh dewan asatidz.' }
                     ];
                     this.galleryPhotos = [
                         { id: 1, title: 'Gedung Madrasah', url: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop', caption: 'Suasana belajar.' }
@@ -1335,6 +1345,10 @@
                 openNewsModal(item = null) {
                     this.editingNews = item ? { ...item } : { id: null, title: '', category: 'Informasi', date: new Date().toLocaleDateString('id-ID'), image: '', summary: '' };
                     this.newsModalOpen = true;
+                },
+                openNewsDetail(item) {
+                    this.selectedNews = item;
+                    this.newsDetailModalOpen = true;
                 },
                 saveNews() {
                     if (this.editingNews.id) {
